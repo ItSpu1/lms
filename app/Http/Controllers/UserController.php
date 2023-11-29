@@ -51,5 +51,10 @@ public function UserLogout(Request $request)
 
     return redirect('/login');
 }
+public function UserChangePassword(){
+    $id =Auth::user()->id;
+    $profileData= User::find($id);
+    return view('frontend.dashboard.change_password',compact('profileData'));
 
+}
 }
