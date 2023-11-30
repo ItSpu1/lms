@@ -119,7 +119,17 @@ class AdminController extends Controller
         );
         return redirect()->route('instructor.login')->with($notification);
             
-    }
+    }  //end owies
 
-    //end owies
+
+    // owies mndeno hahahah section 10 
+
+    public function AllInstructor(){
+
+        $allinstructor = User::where('role','instructor')->latest()->get();
+        return view('admin.backend.instructor.all_instructor',compact('allinstructor'));
+
+     
+
+    } // owies section 10 
 }
