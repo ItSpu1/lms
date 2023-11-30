@@ -110,4 +110,41 @@ class CategoryController extends Controller
     );
     return redirect()->route('all.subcategory')->with($notification);
 }//end method
+    public function EditSubCategory($id){
+        $category=Category::latest()->get();
+        $subcategory=SubCategory::find($id);
+        return view('admin.backend.subcategory.edit_subcategory',compact('category','subcategory'));
+    }
+    public function UpdateSubCategory(Request $request){
+        $subcat_id=$request->id;
+
+            SubCategory::find($subcat_id)->update([
+                'category_id'=>$request->category_id,
+                'subcategory_name'=>$request->subcategory_name,
+                'subcategory_slug'=>strtolower(str_replace('','-',$request->subcategory_name)),// Web Development =>web-development
+
+            ]);
+            $notification = array(
+                'message'=>'SubCategory updated with Image  Successfully',
+                'alert-Type'=>'Success'
+            );
+            return redirect()->route('all.subcategory')->with($notification);
+
+
+        }//end method
+
+    public function DeleteSubCategory($id){
+
+        SubCategory ::find($id)->delete();
+        $notification = array(
+            'message'=>'SubCategory Deleted Successfully',
+            'alert-Type'=>'Success'
+        );
+
+        return redirect()->back()->with($notification);
+
+
+    }
 }
+
+

@@ -10,7 +10,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Add SubCategory</li>
+								<li class="breadcrumb-item active" aria-current="page">Edit SubCategory</li>
 							</ol>
 						</nav>
 					</div>
@@ -20,15 +20,16 @@
 <div class="card">
 							<div class="card-body p-4">
 								<h5 class="mb-4">Add SubCategory</h5>
-								<form id="myform" action="{{ route('store.subcategory') }}" method="post"class="row g-3" enctype="multipart/form-data">
+								<form id="myform" action="{{ route('update.subcategory') }}" method="post"class="row g-3" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="id" value="{{ $subcategory->id }}">
                                     <div class="form-group col-md-12">
 										<label for="input1" class="form-label">Category Name</label>
 										<select class="form-select mb-3"name="category_id" aria-label="Default select example">
 
                                         <option selected="" disables>Select Category</option>
                                           @foreach($category as $cat)
-                                        <option value="{{ $cat->id }}" >{{ $cat->category_name }}</option>
+                                        <option value="{{ $cat->id }}" {{ $cat->id== $subcategory->category_id ? 'selected ': 'empty' }}>{{ $cat->category_name }}</option>
 
                                         @endforeach
 								</select>
@@ -37,7 +38,7 @@
 
 									<div class="form-group col-md-12">
 										<label for="input1" class="form-label">SubCategory Name</label>
-										<input type="text" name="subcategory_name" class="form-control" id="input1" >
+										<input type="text" name="subcategory_name" class="form-control" id="input1" value="{{ $subcategory->subcategory_name }}">
 									</div>
 
 									<div class="col-md-12">
