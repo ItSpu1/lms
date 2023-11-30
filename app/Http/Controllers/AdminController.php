@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+
 class AdminController extends Controller
 {
     public function AdminDashboard(){
         return view ('admin.index');
-
 
     }
     public function AdminLogout(Request $request)
@@ -87,4 +87,39 @@ class AdminController extends Controller
     return redirect()->back()->with($notification);
 
     }
+    //start owies
+    public function BecomeInstructor(){
+        
+        return view('frontend.instructor.reg_instructor');
+        
+    }
+    public function InstructorRegister(Request $request){
+        
+        $request->validate([
+            'name' => ['required','string','max:255' ],
+            'email' => ['required','string','unique:users'],
+
+        ]);
+
+        User::insert([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'password' => Hash::make($request->password),
+            'role' => 'instructor',
+            'status' => '0',
+
+
+        ]);
+        $notification = array(
+            'message'=>'Instructor Register Successfully!',
+            'alert-Type'=>'success'
+        );
+        return redirect()->route('instructor.login')->with($notification);
+            
+    }
+
+    //end owies
 }

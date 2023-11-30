@@ -58,7 +58,9 @@
 
                                                 <div class="col-12">
                                                     <label for="inputEmailAddress" class="form-label">Email</label>
-                                                    <input type="email" id="email" name="email" class="form-control @error('email') is-invailed @enderror">
+                                                    <input type="email" id="email" name="email" class="form-control 
+													@error('email') is-invailed @enderror">
+													
                                                     @error('email')
                                                     <span class="text-danger">{{$message}}</span>
                                                     @enderror

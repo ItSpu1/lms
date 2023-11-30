@@ -48,7 +48,19 @@ Route::post('/admin/profile/store',[AdminController::class,'AdminProfileStore'])
 Route::get('/admin/change/password',[AdminController::class,'AdminChangePassword'])->name('admin.change.password');
 Route::post('/admin/password/update',[AdminController::class,'AdminPasswordUpdate'])->name('admin.password.update');
 });
+
+
+
+
 Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
+
+//owies
+Route::get('/become/instructor',[AdminController::class,'BecomeInstructor'])->name('become.instructor');
+
+Route::post('/instructor/register',[AdminController::class,'InstructorRegister'])->name('instructor.register');
+//owies
+
+
 
 Route::middleware(['auth','role:instructor'])->group(function(){
 Route::get('/instructor/dashboard',[InstructorController::class,'InstructorDashboard'])->name('instructor.dashboard');
