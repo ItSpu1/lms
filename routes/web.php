@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Backend\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,8 @@ use App\Http\Controllers\UserController;
 //    return view('welcome');
 //});
 
-Route::get('/',[UserController::class,'Index'])->name('index');
+Route::get('/',[UserController::class,'Public'])->name('public');
+
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.index');
 
@@ -32,6 +34,8 @@ Route::get('/user/profile',[UserController::class,'UserProfile'])->name('user.pr
 Route::post('/user/profile/store',[UserController::class,'UserProfileStore'])->name('user.profile.store');
 Route::get('/user/logout',[UserController::class,'UserLogout'])->name('user.logout');
 Route::get('/user/change/password',[UserController::class,'UserChangePassword'])->name('user.change.password');
+Route::post('/user/password/update',[UserController::class,'UserPasswordUpdate'])->name('user.password.update');
+
 });
 
 require __DIR__.'/auth.php';
@@ -56,3 +60,14 @@ Route::post('/instructor/password/update',[InstructorController::class,'Instruct
 });
 
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
+
+//category group controller added bu eenas
+Route::controller(CategoryController::class)->group(function(){
+    Route::get('/all/category','AllCategory')->name('all.category');
+    Route::get('/add/category','AddCategory')->name('add.category');
+    Route::post('/store/category','StoreCategory')->name('store.category');
+    Route::get('/edit/category/{id}','EditCategory')->name('edit.category');
+    Route::post('/update/category','UpdateCategory')->name('update.category');
+    Route::get('/delete/category/{id}','DeleteCategory')->name('delete.category');
+});
+

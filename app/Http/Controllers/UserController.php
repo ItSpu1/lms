@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-public function Index(){
-    return view('frontend.index');
+public function Public(){
+    return view('frontend.public');
 }
 public function UserProfile(){
     $id =Auth::user()->id;
@@ -55,6 +55,31 @@ public function UserChangePassword(){
     $id =Auth::user()->id;
     $profileData= User::find($id);
     return view('frontend.dashboard.change_password',compact('profileData'));
+
+}
+public function UserPasswordUpdate(Request $request){
+    //validation
+    $request->validate([
+        'old_password'=>'required',
+        'new_password'=>'required|confirmed',
+    ]);
+if(!Hash::check($request->old_password, auth::user()->password)){
+    $notification = array(
+        'message'=>'Old Password Does not Match!',
+        'alert-Type'=>'error'
+    );
+    return redirect()->back()->with($notification);
+}
+//update the new password
+User::whereId(auth::user()->id)->update([
+    'password'=>Hash::make($request->new_password)
+
+]);
+$notification = array(
+    'message'=>'Password Change Successfully!',
+    'alert-Type'=>'success'
+);
+return redirect()->back()->with($notification);
 
 }
 }
