@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\backend\CategoryController;
+use App\Http\Controllers\backend\CourseCotroller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,10 +26,7 @@ use App\Http\Controllers\Backend\CategoryController;
 Route::get('/',[UserController::class,'Public'])->name('public');
 
 Route::get('/dashboard', function () {
-    return view('frontend.dashboard.index');
-
-
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('frontend.dashboard.index');})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 Route::get('/user/profile',[UserController::class,'UserProfile'])->name('user.profile');
@@ -39,6 +38,8 @@ Route::post('/user/password/update',[UserController::class,'UserPasswordUpdate']
 });
 
 require __DIR__.'/auth.php';
+
+//Admin Group Middleware
 
 Route::middleware(['auth','role:admin'])->group(function(){
 Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.dashboard');
@@ -69,8 +70,15 @@ Route::get('/instructor/profile',[InstructorController::class,'InstructorProfile
 Route::post('/instructor/profile/store',[InstructorController::class,'InstructorProfileStore'])->name('instructor.profile.store');
 Route::get('/instructor/change/password',[InstructorController::class,'InstructorChangePassword'])->name('instructor.change.password');
 Route::post('/instructor/password/update',[InstructorController::class,'InstructorPasswordUpdate'])->name('instructor.password.update');
+//AGHA
+Route::controller(CourseCotroller::class)->group(function(){
+    Route::get('/all/course','AllCourse')->name('all.course');
+    Route::get('/add/course','AddCourse')->name('add.course');
+    Route::get('/subcategory/ajax/{category_id}','GetSubCategory');
+    Route::get('/store/course','StoreCourse')->name('store.course');
+//AGHA video 61
 });
-
+});
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
 
 //category group controller added bu eenas
