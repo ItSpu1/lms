@@ -89,12 +89,12 @@ class AdminController extends Controller
     }
     //start owies
     public function BecomeInstructor(){
-        
+
         return view('frontend.instructor.reg_instructor');
-        
+
     }
     public function InstructorRegister(Request $request){
-        
+
         $request->validate([
             'name' => ['required','string','max:255' ],
             'email' => ['required','string','unique:users'],
@@ -118,18 +118,33 @@ class AdminController extends Controller
             'alert-Type'=>'success'
         );
         return redirect()->route('instructor.login')->with($notification);
-            
+
     }  //end owies
 
 
-    // owies mndeno hahahah section 10 
+    // owies mndeno hahahah section 10
 
     public function AllInstructor(){
 
         $allinstructor = User::where('role','instructor')->latest()->get();
         return view('admin.backend.instructor.all_instructor',compact('allinstructor'));
 
-     
 
-    } // owies section 10 
+
+    } // owies section 10
+    public function UpdateUserStatus(Request $request){
+
+        $userId = $request->input('user_id');
+        $isChecked = $request->input('is_checked',0);
+
+        $user = User::find($userId);
+        if ($user) {
+            $user->status = $isChecked;
+            $user->save();
+        }
+
+        return response()->json(['message' => 'User Status Updated Successfully']);
+
+    }// End Method
+
 }

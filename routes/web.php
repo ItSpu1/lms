@@ -96,5 +96,5 @@ Route::controller(CategoryController::class)->group(function(){
 //Instructor all route Added By owies section 10
 Route::controller(AdminController::class)->group(function(){
     Route::get('/all/instructor','AllInstructor')->name('all.instructor');
-   
+    Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
 });
