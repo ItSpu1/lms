@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\backend\CategoryController;
-use App\Http\Controllers\backend\CourseCotroller;
+use App\Http\Controllers\backend\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,11 +71,11 @@ Route::post('/instructor/profile/store',[InstructorController::class,'Instructor
 Route::get('/instructor/change/password',[InstructorController::class,'InstructorChangePassword'])->name('instructor.change.password');
 Route::post('/instructor/password/update',[InstructorController::class,'InstructorPasswordUpdate'])->name('instructor.password.update');
 //AGHA
-Route::controller(CourseCotroller::class)->group(function(){
+Route::controller(CourseController::class)->group(function(){
     Route::get('/all/course','AllCourse')->name('all.course');
     Route::get('/add/course','AddCourse')->name('add.course');
     Route::get('/subcategory/ajax/{category_id}','GetSubCategory');
-    Route::get('/store/course','StoreCourse')->name('store.course');
+    Route::post('/store/course','StoreCourse')->name('store.course');
 //AGHA video 61
 });
 });

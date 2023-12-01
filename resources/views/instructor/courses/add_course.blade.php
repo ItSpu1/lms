@@ -52,21 +52,24 @@
                                     <div class="form-group col-md-6">
 										<label for="input1" class="form-label">Course Category</label>
                                         <select class="form-select mb-3"name="category_id" aria-label="Default select example">
-
                                             <option selected="" disables>Open This Select Menue</option>
                                             @foreach($categories as $cat)
                                             <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-    
                                             @endforeach
                                         </select>
                                     </div>
 
+
                                     <div class="form-group col-md-6">
-										<label for="input1" class="form-label">Course Subcategory</label>
-                                        <select class="form-select mb-3"name="subcategory_id" aria-label="Default select example">
-                                        <option ></option>
+                                        <label for="input1" class="form-label">Course Subcategory </label>
+                                        <select name="subcategory_id" class="form-select mb-3" aria-label="Default select example">
+                                            <option> </option> 
+                        
                                         </select>
                                     </div>
+
+
+
 
                                     <div class="form-group col-md-6">
 										<label for="input1" class="form-label">Certificate Available</label>
@@ -211,34 +214,34 @@
         $(document).on("click",".removeeventmore",function(event){
         $(this).closest("#whole_extra_item_delete").remove();
             counter -= 1
-       });
+        });
     });
- </script>
- <!--========== End of add multiple class with ajax ==============-->
+</script>
+<!--========== End of add multiple class with ajax ==============-->
 
-            <script type="text/javascript">
+
+<script type="text/javascript">
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
                 course_name: {
                     required : true,
-                },
-            rules: {
+                }, 
                 course_title: {
                     required : true,
-                },
+                }, 
+                
             },
             messages :{
-                course_name: {
+                category_name: {
                     required : 'Please Enter Course Name',
-                },
-            messages :{
-                course_title: {
+                }, 
+                image: {
                     required : 'Please Select Course Title',
-                },
-
+                }, 
+                 
             },
-            errorElement : 'span',
+            errorElement : 'span', 
             errorPlacement: function (error,element) {
                 error.addClass('invalid-feedback');
                 element.closest('.form-group').append(error);
@@ -251,38 +254,41 @@
             },
         });
     });
-//AGHA
-    <script type="text/javascript">
+    
+</script>
+
+
+
+<script type="text/javascript">
         
-        $(document).ready(function(){
-            $('select[name="category_id"]').on('change', function(){
-                var category_id = $(this).val();
-                if (category_id) {
-                    $.ajax({
-                        url: "{{ url('/subcategory/ajax') }}/"+category_id,
-                        type: "GET",
-                        dataType:"json",
-                        success:function(data){
-                            $('select[name="subcategory_id"]').html('');
-                            var d =$('select[name="subcategory_id"]').empty();
-                            $.each(data, function(key, value){
-                                $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.subcategory_name + '</option>');
-                            });
-                        },
+    $(document).ready(function(){
+        $('select[name="category_id"]').on('change', function(){
+            var category_id = $(this).val();
+            if (category_id) {
+                $.ajax({
+                    url: "{{ url('/subcategory/ajax') }}/"+category_id,
+                    type: "GET",
+                    dataType:"json",
+                    success:function(data){
+                        $('select[name="subcategory_id"]').html('');
+                        var d =$('select[name="subcategory_id"]').empty();
+                        $.each(data, function(key, value){
+                            $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.subcategory_name + '</option>');
+                        });
+                    },
 
-                    });
-                    <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-                } else {
-                    alert('danger');
-                }
-            });
+                });
+            } else {
+                alert('danger');
+            }
         });
-
-  </script>
-//AGHA
+    });
 
 </script>
-            <script type="text/javascript">
+
+
+
+<script type="text/javascript">
             $(document).ready(function(){
                 $('#image').change(function(e){
                     var reader = new FileReader();
