@@ -38,14 +38,10 @@ class CourseCotroller extends Controller
 
         $video=$request->file('video');
         $videoName= time().'.'.$video->getClientOriginalExtension();
-        $video->move(public_path('upload/course/video/'),$videoName;)
+        $video->move(public_path('upload/course/video/'),$videoName);
         $save_url ='upload/course/video/'.$videoName;
 
-        $course_id= Course::insertGetId([
-            ''=>
-            ''=>
-        ])        
-
+      
     }//end method
 
 
