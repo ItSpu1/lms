@@ -50,8 +50,8 @@ class CourseController extends Controller
         $save_video='upload/course/video/'.$videoName;
 
         $course_id= Course::insertGetId([
-            'catagory_id'=>$request->catagory_id,
-            'subcatagory_id'=>$request->subcatagory_id,
+            'category_id'=>$request->category_id,
+            'subcategory_id'=>1,
             'instructor_id'=>Auth::user()->id,
             'course_title'=>$request->course_title,
             'course_name'=>$request->course_name,

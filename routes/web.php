@@ -62,7 +62,7 @@ Route::post('/instructor/register',[AdminController::class,'InstructorRegister']
 //owies
 
 
-
+//Instructor Group Middleware
 Route::middleware(['auth','role:instructor'])->group(function(){
 Route::get('/instructor/dashboard',[InstructorController::class,'InstructorDashboard'])->name('instructor.dashboard');
 Route::get('/instructor/logout',[InstructorController::class,'InstructorLogout'])->name('instructor.logout');
