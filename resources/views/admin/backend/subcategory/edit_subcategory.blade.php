@@ -19,7 +19,7 @@
 				<!--end breadcrumb-->
 <div class="card">
 							<div class="card-body p-4">
-								<h5 class="mb-4">Add SubCategory</h5>
+								<h5 class="mb-4">Edit SubCategory</h5>
 								<form id="myform" action="{{ route('update.subcategory') }}" method="post"class="row g-3" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $subcategory->id }}">

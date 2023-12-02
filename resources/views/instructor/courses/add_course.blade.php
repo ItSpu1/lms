@@ -53,7 +53,6 @@
                                     <div class="form-group col-md-6">
 										<label for="input1" class="form-label">Course Category</label>
                                         <select class="form-select mb-3"name="category_id" aria-label="Default select example">
-
                                             <option selected="" disables>Open This Select Menue</option>
                                             @foreach($categories as $cat)
                                             <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
@@ -62,12 +61,15 @@
                                         </select>
                                     </div>
 
-                                   <div class="form-group col-md-6">
-                <label for="input1" class="form-label">Course Subcategory </label>
-                <select name="category_id" class="form-select mb-3" aria-label="Default select example">
-                    <option selected="" disabled>Open this select menu</option>
-                <select name="subcategory_id" class="form-select mb-3" aria-label="Default select example">
-                    <option> </option>
+
+
+                                    <div class="form-group col-md-6">
+                                        <label for="input1" class="form-label">Course Subcategory</label>
+                                        <select name="subcategory_id" class="form-select mb-3" aria-label="Default select example">
+                                            <option></option>
+                                        </select>
+                                    </div>
+
 
                 </select>
             </div>
@@ -120,7 +122,6 @@
 										<label for="input1" class="form-label">Course Description</label>
                                         <textarea name="description" class="form-control"  id="myeditorinstance"></textarea>
                                     </div>
-
 
                                     <p>Course Goals</p>
                         <!--   //////////// Goal Option /////////////// -->
@@ -202,6 +203,7 @@
     </div>
 </div>
 
+
 <!----For Section-------->
 <script type="text/javascript">
     $(document).ready(function(){
@@ -214,32 +216,60 @@
         $(document).on("click",".removeeventmore",function(event){
         $(this).closest("#whole_extra_item_delete").remove();
             counter -= 1
-       });
+        });
     });
- </script>
- <!--========== End of add multiple class with ajax ==============-->
+</script>
+<!--========== End of add multiple class with ajax ==============-->
 
-            <script type="text/javascript">
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('select[name="category_id"]').on('change', function(){
+            var category_id = $(this).val();
+            if (category_id) {
+                $.ajax({
+                    url: "{{ url('/subcategory/ajax') }}/"+category_id,
+                    type: "GET",
+                    dataType:"json",
+                    success:function(data){
+                        $('select[name="subcategory_id"]').html('');
+                        var d =$('select[name="subcategory_id"]').empty();
+                        $.each(data, function(key, value){
+                            $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.subcategory_name + '</option>');
+                        });
+                    },
+
+                });
+            } else {
+                alert('danger');
+            }
+        });
+    });
+
+</script>
+
+
+
+<script type="text/javascript">
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
                 course_name: {
                     required : true,
                 },
-            rules: {
                 course_title: {
                     required : true,
                 },
+
             },
             messages :{
-                course_name: {
+                category_name: {
                     required : 'Please Enter Course Name',
                 },
-            messages :{
                 course_title: {
                     required : 'Please Select Course Title',
                 },
-
             },
             errorElement : 'span',
             errorPlacement: function (error,element) {
@@ -282,7 +312,12 @@
 //AGHA
 
 </script>
-            <script type="text/javascript">
+
+
+
+
+
+<script type="text/javascript">
             $(document).ready(function(){
                 $('#image').change(function(e){
                     var reader = new FileReader();
