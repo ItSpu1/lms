@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use app\Models\SubCategory;
 use App\Models\Course;
 use App\Models\Course_goal;
+use App\Models\CourseLecture;
+use App\Models\CourseSection;
 use Intervention\Image\Facades\Image;
 use App\Models\Category;
 use Carbon\Carbon;
@@ -95,10 +97,38 @@ class CourseController extends Controller
             return redirect()->route('all.course')->with($notification);
 
 
-    }  //end method
+    }  //end method   //AGHA
+
+            //owies
 
 
+    public function AddCourseLecture($id){
 
 
+        $course =Course::find($id);
+
+        return view('instructor.courses.section.add_course_lecture' ,compact
+        ('course'));
+    }
+
+    public function AddCourseSection(Request $request){
+
+        $cid = $request->id;
+        
+        CourseSection::insert([
+            'course_id => $cid',
+            'section_title' => $request->section_title,
+        ]);
+
+        $notification = array(
+            'message'=>'Course Section Add Successfully',
+            'alert-Type'=>'Success'
+        );
+        return redirect()->route('all.course')->with($notification);
+
+    }
+        
+    
+           
+              // owies video 78
 }
-//AGHA

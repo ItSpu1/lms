@@ -78,6 +78,17 @@ Route::controller(CourseController::class)->group(function(){
     Route::post('/store/course','StoreCourse')->name('store.course');
 //AGHA video 61
 });
+
+//course section and lecture by owies
+Route::controller(CourseController::class)->group(function(){
+    Route::get('/add/course/lecture/{id}','AddCourseLecture')->name('add.course_lecture');
+    Route::post('/add/course/section/','AddCourseSection')->name('add.course.section');
+  
+//owies video 78
+});
+
+
+
 });
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
 
