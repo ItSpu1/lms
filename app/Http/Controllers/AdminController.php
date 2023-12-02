@@ -95,6 +95,8 @@ class AdminController extends Controller
     }
     public function InstructorRegister(Request $request){
 
+       
+       
         $request->validate([
             'name' => ['required','string','max:255' ],
             'email' => ['required','string','unique:users'],
@@ -118,6 +120,7 @@ class AdminController extends Controller
             'alert-Type'=>'success'
         );
         return redirect()->route('instructor.login')->with($notification);
+
 
     }  //end owies
 
@@ -148,3 +151,7 @@ class AdminController extends Controller
     }// End Method
 
 }
+
+
+    //end owies
+
