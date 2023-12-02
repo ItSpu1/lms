@@ -41,7 +41,7 @@ class CourseCotroller extends Controller
         $video->move(public_path('upload/course/video/'),$videoName);
         $save_url ='upload/course/video/'.$videoName;
 
-      
+
     }//end method
 
 

@@ -1,6 +1,7 @@
 @extends('instructor.instructor_dashboard')
 @section('instructor')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><!--library for show image whn you upload it -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--library for show image whn you upload it -->
+
 <div class="page-content">
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -32,7 +33,7 @@
 										<label for="input1" class="form-label">Course Tilte</label>
 										<input type="text" name="course_title" class="form-control" id="input1" >
 									</div>
-                                    
+
 
 									<div class="form-group col-md-6">
 										<label for="input2" class="form-label">Course Image</label>
@@ -56,18 +57,20 @@
                                             <option selected="" disables>Open This Select Menue</option>
                                             @foreach($categories as $cat)
                                             <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-    
+
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-md-6">
-										<label for="input1" class="form-label">Course Subcategory</label>
-                                        <select class="form-select mb-3"name="subcategory_id" aria-label="Default select example">
-                                        <option ></option>
-                                        </select>
-                                    </div>
+                                   <div class="form-group col-md-6">
+                <label for="input1" class="form-label">Course Subcategory </label>
+                <select name="category_id" class="form-select mb-3" aria-label="Default select example">
+                    <option selected="" disabled>Open this select menu</option>
+                <select name="subcategory_id" class="form-select mb-3" aria-label="Default select example">
+                    <option> </option>
 
+                </select>
+            </div>
                                     <div class="form-group col-md-6">
 										<label for="input1" class="form-label">Certificate Available</label>
                                         <select class="form-select mb-3"name="certificate" aria-label="Default select example">
@@ -122,7 +125,7 @@
                                     <p>Course Goals</p>
                         <!--   //////////// Goal Option /////////////// -->
                         <div class="row add_item">
-        
+
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="goals" class="form-label"> Goals </label>
@@ -134,7 +137,7 @@
                         </div>
                         </div> <!---end row-->
                                         <!--   //////////// End Goal Option /////////////// -->
-                                    
+
 
                                     <hr>
                                 <div class="row">
@@ -143,17 +146,17 @@
                                             <input class="form-check-input" type="checkbox" name="bestseller" value="1" id="flexCheckDefault"><label class="form-check-label" for="flexCheckDefault">Best Seller</label>
                                         </div>
                                     </div>
-                                
 
-                                
+
+
                                     <div class="col-md-4">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="featured" value="1" id="flexCheckDefault"><label class="form-check-label" for="flexCheckDefault">Featured</label>
                                         </div>
                                     </div>
-                                
-                                
-                                
+
+
+
                                     <div class="col-md-4">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="highestrated" value="1" id="flexCheckDefault"><label class="form-check-label" for="flexCheckDefault">Highest Rated</label>
@@ -183,8 +186,8 @@
         <div class="whole_extra_item_delete" id="whole_extra_item_delete">
             <div class="container mt-2">
                 <div class="row">
-                
-                
+
+
                 <div class="form-group col-md-6">
                     <label for="goals">Goals</label>
                     <input type="text" name="course_goals[]" id="goals" class="form-control" placeholder="Goals  ">
@@ -197,7 +200,7 @@
             </div>
         </div>
     </div>
-</div>      
+</div>
 
 <!----For Section-------->
 <script type="text/javascript">
@@ -252,33 +255,30 @@
         });
     });
 //AGHA
-    <script type="text/javascript">
-        
-        $(document).ready(function(){
-            $('select[name="category_id"]').on('change', function(){
-                var category_id = $(this).val();
-                if (category_id) {
-                    $.ajax({
-                        url: "{{ url('/subcategory/ajax') }}/"+category_id,
-                        type: "GET",
-                        dataType:"json",
-                        success:function(data){
-                            $('select[name="subcategory_id"]').html('');
-                            var d =$('select[name="subcategory_id"]').empty();
-                            $.each(data, function(key, value){
-                                $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.subcategory_name + '</option>');
-                            });
-                        },
-
-                    });
-                    <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-                } else {
-                    alert('danger');
-                }
-            });
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('select[name="category_id"]').on('change', function(){
+            var category_id = $(this).val();
+            if (category_id) {
+                $.ajax({
+                    url: "{{ url('/subcategory/') }}/"+category_id,
+                    type: "GET",
+                    dataType:"json",
+                    success:function(data){
+                        $('select[name="subcategory_id"]').html('');
+                        $('select[name="subcategory_id"]').empty();
+                        $.each(data, function(key, value){
+                            $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.subcategory_name + '</option>');
+                        });
+                    },
+                });
+                $('select[name="subcategory_id"]').append('<option value="{{ $cat->id }}">{{ $cat->category_name }}</option>');
+            } else {
+                alert('danger');
+            }
         });
-
-  </script>
+    });
+</script>
 //AGHA
 
 </script>
