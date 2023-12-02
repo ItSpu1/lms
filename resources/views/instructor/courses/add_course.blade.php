@@ -1,6 +1,7 @@
 @extends('instructor.instructor_dashboard')
 @section('instructor')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><!--library for show image whn you upload it -->
+
 <div class="page-content">
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -59,17 +60,12 @@
                                         </select>
                                     </div>
 
-
                                     <div class="form-group col-md-6">
-                                        <label for="input1" class="form-label">Course Subcategory </label>
+                                        <label for="input1" class="form-label">Course Subcategory</label>
                                         <select name="subcategory_id" class="form-select mb-3" aria-label="Default select example">
-                                            <option> </option> 
-                        
+                                            <option></option>
                                         </select>
                                     </div>
-
-
-
 
                                     <div class="form-group col-md-6">
 										<label for="input1" class="form-label">Certificate Available</label>
@@ -120,7 +116,6 @@
 										<label for="input1" class="form-label">Course Description</label>
                                         <textarea name="description" class="form-control"  id="myeditorinstance"></textarea>
                                     </div>
-
 
                                     <p>Course Goals</p>
                         <!--   //////////// Goal Option /////////////// -->
@@ -202,6 +197,7 @@
     </div>
 </div>      
 
+
 <!----For Section-------->
 <script type="text/javascript">
     $(document).ready(function(){
@@ -218,45 +214,6 @@
     });
 </script>
 <!--========== End of add multiple class with ajax ==============-->
-
-
-<script type="text/javascript">
-    $(document).ready(function (){
-        $('#myForm').validate({
-            rules: {
-                course_name: {
-                    required : true,
-                }, 
-                course_title: {
-                    required : true,
-                }, 
-                
-            },
-            messages :{
-                category_name: {
-                    required : 'Please Enter Course Name',
-                }, 
-                image: {
-                    required : 'Please Select Course Title',
-                }, 
-                 
-            },
-            errorElement : 'span', 
-            errorPlacement: function (error,element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight : function(element, errorClass, validClass){
-                $(element).addClass('is-invalid');
-            },
-            unhighlight : function(element, errorClass, validClass){
-                $(element).removeClass('is-invalid');
-            },
-        });
-    });
-    
-</script>
-
 
 
 <script type="text/javascript">
@@ -285,6 +242,46 @@
     });
 
 </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('#myForm').validate({
+            rules: {
+                course_name: {
+                    required : true,
+                }, 
+                course_title: {
+                    required : true,
+                }, 
+                
+            },
+            messages :{
+                category_name: {
+                    required : 'Please Enter Course Name',
+                }, 
+                course_title: {
+                    required : 'Please Select Course Title',
+                }, 
+            },
+            errorElement : 'span', 
+            errorPlacement: function (error,element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight : function(element, errorClass, validClass){
+                $(element).addClass('is-invalid');
+            },
+            unhighlight : function(element, errorClass, validClass){
+                $(element).removeClass('is-invalid');
+            },
+        });
+    });
+    
+</script>
+
 
 
 
