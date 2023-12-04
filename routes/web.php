@@ -76,12 +76,19 @@ Route::controller(CourseController::class)->group(function(){
     Route::get('/add/course','AddCourse')->name('add.course');
     Route::get('/subcategory/ajax/{category_id}','GetSubCategory');
     Route::post('/store/course','StoreCourse')->name('store.course');
+    Route::get('/edit/course/{id}','EditCourse')->name('edit.course');
+    Route::post('/update/course','UpdateCourse')->name('update.course');
+    Route::post('/update/course/image','UpdateCourseImage')->name('update.course.image');
+    Route::post('/update/course/video','UpdateCourseVideo')->name('update.course.video');
+    Route::post('/update/course/goal','UpdateCourseGoal')->name('update.course.goal');
+    Route::get('/delete/course/{id}','DeleteCourse')->name('delete.course');
 //AGHA video 61
+
 });
 
 //course section and lecture by owies
 Route::controller(CourseController::class)->group(function(){
-    Route::get('/add/course/lecture/{id}','AddCourseLecture')->name('add.course_lecture');
+    Route::get('/add/course/lecture/{id}','AddCourseLecture')->name('add.course.lecture');
     Route::post('/add/course/section/','AddCourseSection')->name('add.course.section');
   
 //owies video 78
@@ -90,6 +97,7 @@ Route::controller(CourseController::class)->group(function(){
 
 
 });
+
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
 
 //category group controller added bu eenas
@@ -100,6 +108,7 @@ Route::controller(CategoryController::class)->group(function(){
     Route::get('/edit/category/{id}','EditCategory')->name('edit.category');
     Route::post('/update/category','UpdateCategory')->name('update.category');
     Route::get('/delete/category/{id}','DeleteCategory')->name('delete.category');
+
 });
 //SubCategory Added By enas section 8
 Route::controller(CategoryController::class)->group(function(){
