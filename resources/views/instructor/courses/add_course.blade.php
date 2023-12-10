@@ -241,9 +241,9 @@
         $('select[name="category_id"]').on('change', function(){
             var category_id = $(this).val();
             if (category_id) {
-                $.ajax({ url('/subcategory/ajax') }}/"+category_id,
-                    type: "
-                    url: "{{GET",
+                $.ajax({
+                    url: "{{ url('/subcategory/ajax') }}/"+category_id,
+                    type: "GET",
                     dataType:"json",
                     success:function(data){
                         $('select[name="subcategory_id"]').html('');
@@ -261,7 +261,6 @@
     });
 
 </script>
-
 
 <script type="text/javascript">
     $(document).ready(function (){
