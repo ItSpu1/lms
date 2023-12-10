@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SubCategory;
 use App\Models\Course;
-use App\Models\Course_goal;
+use App\Models\Course_goals;
 use App\Models\CourseLecture;
 use App\Models\CourseSection;
 use Intervention\Image\Facades\Image;
@@ -82,7 +82,7 @@ class CourseController extends Controller
             $goals = Count($request->course_goals);
             if ($goals !=NULL){
                  for ($i=0; $i < $goals; $i++) {
-                    $goal_count = new Course_goal();
+                    $goal_count = new Course_goals();
                     $goal_count ->course_id = $course_id;
                     $goal_count ->goal_name = $request->course_goals[$i];
                     $goal_count->save();
@@ -105,7 +105,7 @@ class CourseController extends Controller
     //Enas section 12
         public function EditCourse($id){
             $course =Course ::find($id);
-            $goals= Course_goal::Where('course_id',$id)->get();
+            $goals= Course_goals::Where('course_id',$id)->get();
             $categories = Category::latest()->get();
             $subcategories = SubCategory::latest()->get();
             return view ('instructor.courses.edit_course',compact('course','categories','subcategories','goals'));
@@ -206,12 +206,12 @@ class CourseController extends Controller
                 }
                 else{
 
-                    Course_goal::where('course_id',$cid)->delete();
+                    Course_goals::where('course_id',$cid)->delete();
 
                     $goles = Count($request->course_goals);
 
                     for ($i=0; $i < $goles; $i++) {
-                        $gcount = new Course_goal();
+                        $gcount = new Course_goals();
                         $gcount->course_id = $cid;
                         $gcount->goal_name = $request->course_goals[$i];
                         $gcount->save();
@@ -231,10 +231,10 @@ class CourseController extends Controller
 
                 Course::find($id)->delete();
 
-                $goalsData = Course_goal::where('course_id',$id)->get();
+                $goalsData = Course_goals::where('course_id',$id)->get();
                 foreach ($goalsData as $item) {
                     $item->goal_name;
-                    Course_goal::where('course_id',$id)->delete();
+                    Course_goals::where('course_id',$id)->delete();
                 }
 
                 $notification = array(

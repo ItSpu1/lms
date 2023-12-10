@@ -75,7 +75,7 @@
                             <div class="btn-box">
                                 <div class="d-flex align-items-center justify-content-between pb-4">
                                     <div class="custom-control custom-checkbox fs-15">
-                                        <input type="checkbox" class="custom-control-input" id="rememberMeCheckbox" required>
+                                        <input type="checkbox" class="custom-control-input" id="rememberMeCheckbox" >
                                         <label class="custom-control-label custom--control-label" for="rememberMeCheckbox">Remember Me</label>
                                     </div><!-- end custom-control -->
                                     <a href="recover.html" class="btn-text">Forgot my password?</a>
