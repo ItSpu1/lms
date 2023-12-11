@@ -11,23 +11,16 @@ class Course extends Model
     use HasFactory;
     protected $guarded=[];
 //AGHA
-    public function category(){
+    public function Category(){
         return $this->belongsto(Category::class, 'category_id' , 'id');
     }
 
-    
+
     public function user(){
         return $this->belongsto(User::class, 'instructor_id' , 'id');
     }
 
-    public function category(){
-        return $this->belongsTo(Category::class,'category_id','id');
-    }
-
     
-    public function user(){
-        return $this->belongsto(User::class, 'instructor_id' , 'id');
-    }
 
 }
 //AGHA

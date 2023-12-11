@@ -7,7 +7,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\CourseController;
-
+use App\Http\Controllers\Frontend\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -131,3 +131,9 @@ Route::controller(AdminController::class)->group(function(){
     Route::get('/all/instructor','AllInstructor')->name('all.instructor');
     Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
 });
+////// Route Accesable for all
+Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
+
+////// Route Accesable for all section 16 added by Enas ^_^
+Route::get('/course/details/{id}/{slug}',[IndexController::class,'CourseDetails']);
+
