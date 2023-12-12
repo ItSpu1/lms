@@ -14,13 +14,17 @@ class Course extends Model
     public function Category(){
         return $this->belongsto(Category::class, 'category_id' , 'id');
     }
+    //enas setion 16
+    public function subCategory(){
+        return $this->belongsto(SubCategory::class, 'subcategory_id' , 'id');
+    }
 
 
     public function user(){
         return $this->belongsto(User::class, 'instructor_id' , 'id');
     }
 
-    
+
 
 }
 //AGHA

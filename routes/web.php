@@ -103,7 +103,7 @@ Route::controller(CourseController::class)->group(function(){
 
 });
 
-Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
+
 
 //category group controller added bu eenas
 Route::controller(CategoryController::class)->group(function(){

@@ -54,7 +54,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2">
                         <div class="logo-box">
-                            <a href="index.html" class="logo"><img src="{{ asset('frontend/images/logo.png') }}" alt="logo"></a>
+                            <a href="{{ url('/') }}" class="logo"><img src="{{ asset('frontend/images/logo.png') }}" alt="logo"></a>
                             <div class="user-btn-action">
                                 <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2" data-toggle="tooltip" data-placement="top" title="Search">
                                     <i class="la la-search"></i>
@@ -204,8 +204,8 @@
                             <nav class="main-menu">
                                 <ul>
                                     <li>
-                                        <a href="#">Home </a>
-                                        
+                                        <a href="{{ url('/') }}">Home </a>
+
                                     </li>
                                     <li>
                                         <a href="#">courses <i class="la la-angle-down fs-12"></i></a>
@@ -214,10 +214,10 @@
                                             <li><a href="course-list.html">course list</a></li>
                                         </ul>
                                     </li>
-                                    
+
                                     <li>
                                         <a href="#">blog</a>
-                                        
+
                                     </li>
                                 </ul><!-- end ul -->
                             </nav><!-- end main-menu -->

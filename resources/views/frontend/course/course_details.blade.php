@@ -9,15 +9,20 @@
             <div class="breadcrumb-content">
                 <ul class="generic-list-item generic-list-item-arrow d-flex flex-wrap align-items-center">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Development</a></li>
-                    <li><a href="#">Java</a></li>
+                    <li><a href="#">{{ $course['category']['category_name'] }}</a></li>
+                    <li><a href="#">{{ $course['subcategory']['subcategory_name'] }}</a></li>
                 </ul>
                 <div class="section-heading">
-                    <h2 class="section__title">Java Programming Masterclass for Software Developers</h2>
-                    <p class="section__desc pt-2 lh-30">Learn Java In This Course And Become a Computer Programmer. Obtain valuable Core Java Skills And Java Certification</p>
+                    <h2 class="section__title">{{ $course->course_name }}</h2>
+                    <p class="section__desc pt-2 lh-30">{{ $course->course_title }}</p>
                 </div><!-- end section-heading -->
                 <div class="d-flex flex-wrap align-items-center pt-3">
-                    <h6 class="ribbon ribbon-lg mr-2 bg-3 text-white">Bestseller</h6>
+                @if ($course->bestseller == 1)
+                <h6 class="ribbon ribbon-lg mr-2 bg-3 text-white">Bestseller</h6>
+                @else
+
+                @endif
+
                     <div class="rating-wrap d-flex flex-wrap align-items-center">
                         <div class="review-stars">
                             <span class="rating-number">4.4</span>
@@ -31,11 +36,11 @@
                         <span class="student-total pl-2">540,815 students</span>
                     </div>
                 </div><!-- end d-flex -->
-                <p class="pt-2 pb-1">Created by <a href="teacher-detail.html" class="text-color hover-underline">Tim Buchalka</a></p>
+                <p class="pt-2 pb-1">Created by <a href="teacher-detail.html" class="text-color hover-underline">{{ $course['user']['name'] }}</a></p>
                 <div class="d-flex flex-wrap align-items-center">
                     <p class="pr-3 d-flex align-items-center">
                         <svg class="svg-icon-color-gray mr-1" width="16px" viewBox="0 0 24 24"><path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-10 5h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
-                        Last updated 2 Jan,2021
+                        Last updated {{ $course->created_at->format('M d Y') }}
                     </p>
                     <p class="pr-3 d-flex align-items-center">
                         <svg class="svg-icon-color-gray mr-1" width="16px" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 015.08 16zm2.95-8H5.08a7.987 7.987 0 014.33-3.56A15.65 15.65 0 008.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 01-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"></path></svg>
@@ -73,52 +78,45 @@
                    <div class="course-overview-card bg-gray p-4 rounded">
                        <h3 class="fs-24 font-weight-semi-bold pb-3">What you'll learn?</h3>
                        <ul class="generic-list-item overview-list-item">
-                           <li><i class="la la-check mr-1 text-black"></i> Learn the core Java skills needed to apply for Java developer positions in just 14 hours.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Be able to demonstrate your understanding of Java to future employers.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Acquire essential java basics for transitioning to the Spring Framework, Java EE, Android development and more.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Be able to sit for and pass the Oracle Java Certificate exam if you choose.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Learn industry "best practices" in Java software development from a professional Java developer who has worked in the language for 18 years.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Obtain proficiency in Java 8 and Java 11.</li>
+                       @foreach ($goals as $goal)
+                    <li><i class="la la-check mr-1 text-black"></i>{{ $goal->goal_name }}</li>
+                       @endforeach
+
+
                        </ul>
                    </div><!-- end course-overview-card -->
                    <div class="course-overview-card bg-gray p-4 rounded">
                        <h3 class="fs-16 font-weight-semi-bold">Curated for the <a href="for-business.html" class="text-color hover-underline">Aduca for Business</a> collection</h3>
                    </div><!-- end course-overview-card -->
                    <div class="course-overview-card">
+
                        <h3 class="fs-24 font-weight-semi-bold pb-3">Requirements</h3>
                        <ul class="generic-list-item generic-list-item-bullet fs-15">
-                           <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                           <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                           <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+
+                           <li>{{ $course->prerequisites }}</li>
                        </ul>
                    </div><!-- end course-overview-card -->
                     <div class="course-overview-card border border-gray p-4 rounded">
                        <h3 class="fs-20 font-weight-semi-bold">Top companies trust Aduca</h3>
                        <p class="fs-15 pb-1">Get your team access to Aduca's top 5,000+ courses</p>
                         <div class="pb-3">
-                            <img width="85" class="mr-3" src="images/sponsor-img.png" alt="company logo">
-                            <img width="80" class="mr-3" src="images/sponsor-img2.png" alt="company logo">
-                            <img width="80" class="mr-3" src="images/sponsor-img3.png" alt="company logo">
-                            <img width="70" class="mr-3" src="images/sponsor-img4.png" alt="company logo">
+                            <img width="85" class="mr-3" src="{{ asset('frontend/images/sponsor-img.png') }}" alt="company logo">
+                            <img width="80" class="mr-3" src="{{ asset('frontend/images/sponsor-img2.png') }}" alt="company logo">
+                            <img width="80" class="mr-3" src="{{ asset('frontend/images/sponsor-img3.png') }}" alt="company logo">
+                            <img width="70" class="mr-3" src="{{ asset('frontend/images/sponsor-img4.png') }}" alt="company logo">
                         </div>
                         <a href="for-business.html" class="btn theme-btn theme-btn-sm">Try Aduca for Business</a>
                    </div><!-- end course-overview-card -->
                    <div class="course-overview-card">
                        <h3 class="fs-24 font-weight-semi-bold pb-3">Description</h3>
-                       <p class="fs-15 pb-2">Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                       <p class="fs-15 pb-2">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy</p>
-                       <p class="fs-15 pb-1">- Lorem ipsum dolor sit amet, consectetur.</p>
-                       <p class="fs-15 pb-1">- Lorem ipsum dolor sit amet, consectetur.</p>
-                       <p class="fs-15 pb-1">- Lorem ipsum dolor sit amet, consectetur.</p>
-                       <p class="fs-15 pt-3 pb-2 lh-22"><strong class="font-weight-semi-bold text-black">Are you aiming to get your first Java Programming job but struggling to find out what skills employers want</strong> and which course will give you those skills?</p>
-                       <p class="fs-15 pb-2">This course is designed to give you the Java skills you need to get a job as a Java developer.  By the end of the course, you will understand Java extremely well and be able to build your own Java apps and be productive as a software developer.</p>
+                            <p class="fs-15 pb-2">{!! $course->description !!}</p>
                        <div class="collapse" id="collapseMore">
-                           <p class="fs-15 pb-2">The core java material you need to learn java development is covered in the first seven sections (around 14 hours in total).  The Java Basics are covered in those sections. The rest of the course covers intermediate, advanced, and optional material you do not technically need to go through.</p>
-                           <h4 class="fs-20 font-weight-semi-bold py-2">Who this course is for:</h4>
+                        <h4 class="fs-20 font-weight-semi-bold py-2">Who this course is for:</h4>
+                           <p class="fs-15 pb-2">{{ $course->prerequisites }}</p>
+
                            <ul class="generic-list-item generic-list-item-bullet fs-15">
-                               <li>Anyone who wants to become a computer programmer</li>
-                               <li>Anyone who wants to become a computer programmer</li>
-                               <li>Anyone who wants to become a computer programmer</li>
+
+
                            </ul>
                        </div>
                        <a class="collapse-btn collapse--btn fs-15" data-toggle="collapse" href="#collapseMore" role="button" aria-expanded="false" aria-controls="collapseMore">
@@ -126,306 +124,85 @@
                            <span class="collapse-btn-show">Show less<i class="la la-angle-up ml-1 fs-14"></i></span>
                        </a>
                    </div><!-- end course-overview-card -->
+                   @php
+                        $lecture=App\Models\CourseLecture::where('course_id',$course->id)->get();
+                   @endphp
                    <div class="course-overview-card">
                        <div class="curriculum-header d-flex align-items-center justify-content-between pb-4">
                            <h3 class="fs-24 font-weight-semi-bold">Course content</h3>
                            <div class="curriculum-duration fs-15">
-                               <span class="curriculum-total__text mr-2"><strong class="text-black font-weight-semi-bold">Total:</strong> 17 lectures</span>
-                               <span class="curriculum-total__hours"><strong class="text-black font-weight-semi-bold">Total hours:</strong> 02:35:47</span>
+                               <span class="curriculum-total__text mr-2"><strong class="text-black font-weight-semi-bold">Total:</strong>{{ count($lecture) }} Lectures </span>
+                               <span class="curriculum-total__hours"><strong class="text-black font-weight-semi-bold">Total hours:</strong> {{ $course->duration }}</span>
                            </div>
                        </div>
+
+@php
+ $section=App\Models\CourseSection::where('course_id',$course->id)->orderby('id','asc')->get();
+@endphp
+
                        <div class="curriculum-content">
                            <div id="accordion" class="generic-accordion">
-                               <div class="card">
-                                   <div class="card-header" id="headingOne">
-                                       <button class="btn btn-link d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                           <i class="la la-plus"></i>
-                                           <i class="la la-minus"></i>
-                                           Course introduction
-                                           <span class="fs-15 text-gray font-weight-medium">6 lectures</span>
-                                       </button>
-                                   </div><!-- end card-header -->
-                                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                       <div class="card-body">
-                                           <ul class="generic-list-item">
-                                               <li>
-                                                   <a href="#" class="d-flex align-items-center justify-content-between text-color" data-toggle="modal" data-target="#previewModal">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Introductory words
-                                                           <span class="ribbon ml-2 fs-13">Preview</span>
-                                                       </span>
-                                                       <span>02:27</span>
-                                                   </a>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Remaster in Progress
-                                                       </span>
-                                                       <span>03:09</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Video Quality
-                                                       </span>
-                                                       <span>01:16</span>
-                                                   </div>
-                                               </li>
-                                                <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Important Tip - Source Code
-                                                       </span>
-                                                       <span>02:07</span>
-                                                   </div>
-                                               </li>
-                                           </ul>
-                                       </div><!-- end card-body -->
-                                   </div><!-- end collapse -->
-                               </div><!-- end card -->
-                               <div class="card">
-                                   <div class="card-header" id="headingTwo">
-                                       <button class="btn btn-link collapsed d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                           <i class="la la-plus"></i>
-                                           <i class="la la-minus"></i>
-                                           Software tools setup
-                                           <span class="fs-15 text-gray font-weight-medium">6 lectures</span>
-                                       </button>
-                                   </div>
-                                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                       <div class="card-body">
-                                           <ul class="generic-list-item">
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Biggest Tip to Succeed as a Java Programmer
-                                                       </span>
-                                                       <span>02:27</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-file mr-1"></i>
-                                                           ** IMPORTANT ** - Configuring IntelliJ IDEA
-                                                       </span>
-                                                       <span>00:16</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Video Quality
-                                                       </span>
-                                                       <span>01:16</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Important Tip - Source Code
-                                                       </span>
-                                                       <span>02:07</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-code mr-1"></i>
-                                                           Interface
-                                                       </span>
-                                                       <span>1 question</span>
-                                                   </div>
-                                               </li>
-                                           </ul>
-                                       </div><!-- end card-body -->
-                                   </div>
-                               </div><!-- end card -->
-                               <div class="card">
-                                   <div class="card-header" id="headingThree">
-                                       <button class="btn btn-link collapsed d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                           <i class="la la-plus"></i>
-                                           <i class="la la-minus"></i>
-                                           Conclusion
-                                           <span class="fs-15 text-gray font-weight-medium">1 lectures</span>
-                                       </button>
-                                   </div>
-                                   <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                       <div class="card-body">
-                                           <ul class="generic-list-item">
-                                               <li>
-                                                   <a href="#" class="d-flex align-items-center justify-content-between text-color" data-toggle="modal" data-target="#previewModal">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Conclusion
-                                                           <span class="ribbon ml-2 fs-13">Watch</span>
-                                                       </span>
-                                                       <span>02:27</span>
-                                                   </a>
-                                               </li>
-                                           </ul>
-                                       </div><!-- end card-body -->
-                                   </div><!-- end collapse -->
-                               </div><!-- end card -->
+
+        @foreach($section as $sec)
+            @php
+            $lecture=App\Models\CourseLecture::where('section_id',$sec->id)->get();
+            @endphp
+            <div class="card">
+                <div class="card-header" id="heading{{ $sec->id }}">
+                    <button class="btn btn-link d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapse{{ $sec->id }}" aria-expanded="true" aria-controls="collapse{{$sec->id  }}">
+                        <i class="la la-plus"></i>
+                        <i class="la la-minus"></i>
+                        {{ $sec->section_title }}
+                        <span class="fs-15 text-gray font-weight-medium">{{ count($lecture) }} lectures</span>
+                    </button>
+                </div><!-- end card-header -->
+                <div id="collapse{{ $sec->id }}" class="collapse show" aria-labelledby="heading{{ $sec->id }}" data-parent="#accordion">
+                    <div class="card-body">
+                        <ul class="generic-list-item">
+                        @foreach ($lecture as $lect )
+
+
+                            <li>
+                                <a href="#" class="d-flex align-items-center justify-content-between">
+                                    <span>
+                                        <i class="la la-play-circle mr-1"></i>
+                                       {{ $lect->lecture_title }}
+
+                                     </span>
+                                    <span>02:27</span>
+                                </a>
+                            </li>
+
+                         @endforeach
+                        </ul>
+                    </div><!-- end card-body -->
+                </div><!-- end collapse -->
+            </div><!-- end card -->
+ @endforeach
                            </div><!-- end generic-accordion -->
                        </div><!-- end curriculum-content -->
                    </div><!-- end course-overview-card -->
-                   <div class="course-overview-card pt-4">
-                       <h3 class="fs-24 font-weight-semi-bold pb-4">Students also bought</h3>
-                       <div class="view-more-carousel owl-action-styled">
-                           <div class="card card-item card-item-list-layout border border-gray shadow-none">
-                               <div class="card-image">
-                                   <a href="course-details.html" class="d-block">
-                                       <img class="card-img-top" src="images/img8.jpg" alt="Card image cap">
-                                   </a>
-                                   <div class="course-badge-labels">
-                                       <div class="course-badge">Bestseller</div>
-                                       <div class="course-badge blue">-39%</div>
-                                   </div>
-                               </div><!-- end card-image -->
-                               <div class="card-body">
-                                   <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                                   <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                                   <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
-                                   <div class="rating-wrap d-flex align-items-center py-2">
-                                       <div class="review-stars">
-                                           <span class="rating-number">4.4</span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star-o"></span>
-                                       </div>
-                                       <span class="rating-total pl-1">(20,230)</span>
-                                   </div><!-- end rating-wrap -->
-                                   <div class="d-flex justify-content-between align-items-center">
-                                       <p class="card-price text-black font-weight-bold">12.99 <span class="before-price font-weight-medium">129.99</span></p>
-                                       <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                                   </div>
-                               </div><!-- end card-body -->
-                           </div><!-- end card -->
-                           <div class="card card-item card-item-list-layout border border-gray shadow-none">
-                               <div class="card-image">
-                                   <a href="course-details.html" class="d-block">
-                                       <img class="card-img-top" src="images/img9.jpg" alt="Card image cap">
-                                   </a>
-                                   <div class="course-badge-labels">
-                                       <div class="course-badge red">Featured</div>
-                                   </div>
-                               </div><!-- end card-image -->
-                               <div class="card-body">
-                                   <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                                   <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                                   <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
-                                   <div class="rating-wrap d-flex align-items-center py-2">
-                                       <div class="review-stars">
-                                           <span class="rating-number">4.4</span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star-o"></span>
-                                       </div>
-                                       <span class="rating-total pl-1">(20,230)</span>
-                                   </div><!-- end rating-wrap -->
-                                   <div class="d-flex justify-content-between align-items-center">
-                                       <p class="card-price text-black font-weight-bold">129.99</p>
-                                       <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                                   </div>
-                               </div><!-- end card-body -->
-                           </div><!-- end card -->
-                           <div class="card card-item card-item-list-layout border border-gray shadow-none">
-                               <div class="card-image">
-                                   <a href="course-details.html" class="d-block">
-                                       <img class="card-img-top" src="images/img8.jpg" alt="Card image cap">
-                                   </a>
-                                   <div class="course-badge-labels">
-                                       <div class="course-badge">Bestseller</div>
-                                       <div class="course-badge blue">-39%</div>
-                                   </div>
-                               </div><!-- end card-image -->
-                               <div class="card-body">
-                                   <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                                   <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                                   <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
-                                   <div class="rating-wrap d-flex align-items-center py-2">
-                                       <div class="review-stars">
-                                           <span class="rating-number">4.4</span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star-o"></span>
-                                       </div>
-                                       <span class="rating-total pl-1">(20,230)</span>
-                                   </div><!-- end rating-wrap -->
-                                   <div class="d-flex justify-content-between align-items-center">
-                                       <p class="card-price text-black font-weight-bold">12.99 <span class="before-price font-weight-medium">129.99</span></p>
-                                       <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                                   </div>
-                               </div><!-- end card-body -->
-                           </div><!-- end card -->
-                           <div class="card card-item card-item-list-layout border border-gray shadow-none">
-                               <div class="card-image">
-                                   <a href="course-details.html" class="d-block">
-                                       <img class="card-img-top" src="images/img9.jpg" alt="Card image cap">
-                                   </a>
-                                   <div class="course-badge-labels">
-                                       <div class="course-badge red">Featured</div>
-                                   </div>
-                               </div><!-- end card-image -->
-                               <div class="card-body">
-                                   <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                                   <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                                   <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
-                                   <div class="rating-wrap d-flex align-items-center py-2">
-                                       <div class="review-stars">
-                                           <span class="rating-number">4.4</span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star"></span>
-                                           <span class="la la-star-o"></span>
-                                       </div>
-                                       <span class="rating-total pl-1">(20,230)</span>
-                                   </div><!-- end rating-wrap -->
-                                   <div class="d-flex justify-content-between align-items-center">
-                                       <p class="card-price text-black font-weight-bold">129.99</p>
-                                       <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                                   </div>
-                               </div><!-- end card-body -->
-                           </div><!-- end card -->
-                       </div><!-- end view-more-carousel -->
-                   </div><!-- end course-overview-card -->
+
                    <div class="course-overview-card pt-4">
                        <h3 class="fs-24 font-weight-semi-bold pb-4">About the instructor</h3>
                        <div class="instructor-wrap">
                            <div class="media media-card">
                                <div class="instructor-img">
                                    <a href="teacher-detail.html" class="media-img d-block">
-                                       <img class="lazy" src="images/img-loading.png" data-src="images/small-avatar-1.jpg" alt="Avatar image">
+                                       <img class="lazy" src="{{ (!empty($course->user->photo)) ?url('upload/instructor_images/'.$course->user->photo):url('upload/no_image.jpg') }}" data-src="images/small-avatar-1.jpg" alt="Avatar image">
                                    </a>
                                    <ul class="generic-list-item pt-3">
                                        <li><i class="la la-star mr-2 text-color-3"></i> 4.6 Instructor Rating</li>
                                        <li><i class="la la-user mr-2 text-color-3"></i> 45,786 Students</li>
                                        <li><i class="la la-comment-o mr-2 text-color-3"></i> 2,533 Reviews</li>
-                                       <li><i class="la la-play-circle-o mr-2 text-color-3"></i> 24 Courses</li>
+                                       <li><i class="la la-play-circle-o mr-2 text-color-3"></i>{{ count($instructorCourses) }} Courses</li>
                                        <li><a href="teacher-detail.html">View all Courses</a></li>
                                    </ul>
                                </div><!-- end instructor-img -->
                                <div class="media-body">
-                                   <h5><a href="teacher-detail.html">Tim Buchalka</a></h5>
-                                   <span class="d-block lh-18 pt-2 pb-3">Joined 4 years ago</span>
-                                   <p class="text-black lh-18 pb-3">Java Python Android and C# Expert Developer - 878K+ students</p>
+                                   <h5><a href="teacher-detail.html">{{ $course['user']['name'] }}</a></h5>
+                                   <span class="d-block lh-18 pt-2 pb-3">Joined {{ Carbon\Carbon::parse($course->user->create_at)->diffForHumans() }}</span>
+                                   <p class="text-black lh-18 pb-3">{{ $course['user']['email'] }}</p>
                                    <p class="pb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
                                    <div class="collapse" id="collapseMoreTwo">
                                        <p class="pb-3">After learning the hard way, Tim was determined to become the best teacher he could, and to make his training as painless as possible, so that you, or anyone else with the desire to become a software developer, could become one.</p>
@@ -674,7 +451,7 @@
                         <div class="card-body">
                             <div class="preview-course-video">
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#previewModal">
-                                    <img src="images/img-loading.png" data-src="images/preview-img.jpg" alt="course-img" class="w-100 rounded lazy">
+                                    <img src="{{ asset($course->course_image) }}" data-src="{{ asset($course->course_image) }}" alt="course-img" class="w-100 rounded lazy">
                                     <div class="preview-course-video-content">
                                         <div class="overlay"></div>
                                         <div class="play-button">
@@ -692,12 +469,21 @@
                                     </div>
                                 </a>
                             </div><!-- end preview-course-video -->
+                              @php
+                                        $amount = $course->selling_price - $course->discount_price ;
+                                        $discount = ($amount/$course->selling_price) * 100 ;
+
+                                    @endphp
                             <div class="preview-course-feature-content pt-40px">
-                                <p class="d-flex align-items-center pb-2">
-                                    <span class="fs-35 font-weight-semi-bold text-black">$76.99</span>
-                                    <span class="before-price mx-1">$104.99</span>
-                                    <span class="price-discount">24% off</span>
-                                </p>
+                <p class="d-flex align-items-center pb-2">
+                @if($course->discount_price == NULL)
+                    <span class="fs-35 font-weight-semi-bold text-black">${{ $course->selling_price }}</span>
+                   @else
+                       <span class="fs-35 font-weight-semi-bold text-black">${{  $course->discount_price }}</span>
+                    <span class="before-price mx-1">${{ $course->selling_price  }}</span>
+                   @endif
+                    <span class="price-discount">{{ round($discount) }}% off</span>
+                </p>
                                 <p class="preview-price-discount-text pb-35px">
                                     <span class="text-color-3">4 days</span> left at this price!
                                 </p>
@@ -709,13 +495,13 @@
                                 <div class="preview-course-incentives">
                                     <h3 class="card-title fs-18 pb-2">This course includes</h3>
                                     <ul class="generic-list-item pb-3">
-                                        <li><i class="la la-play-circle-o mr-2 text-color"></i>2.5 hours on-demand video</li>
-                                        <li><i class="la la-file mr-2 text-color"></i>34 articles</li>
-                                        <li><i class="la la-file-text mr-2 text-color"></i>12 downloadable resources</li>
-                                        <li><i class="la la-code mr-2 text-color"></i>51 coding exercises</li>
-                                        <li><i class="la la-key mr-2 text-color"></i>Full lifetime access</li>
-                                        <li><i class="la la-television mr-2 text-color"></i>Access on mobile and TV</li>
-                                        <li><i class="la la-certificate mr-2 text-color"></i>Certificate of Completion</li>
+                <li><i class="la la-play-circle-o mr-2 text-color"></i>{{ $course->duration }} hours on-demand video</li>
+                <li><i class="la la-file mr-2 text-color"></i>{{ $course->resources }} articles</li>
+                <li><i class="la la-file-text mr-2 text-color"></i>12 downloadable resources</li>
+                <li><i class="la la-code mr-2 text-color"></i>51 coding exercises</li>
+                <li><i class="la la-key mr-2 text-color"></i>Full lifetime access</li>
+                <li><i class="la la-television mr-2 text-color"></i>Access on mobile and TV</li>
+                <li><i class="la la-certificate mr-2 text-color"></i>Certificate of Completion</li>
                                     </ul>
                                     <div class="section-block"></div>
                                     <div class="buy-for-team-container pt-4">
@@ -732,15 +518,15 @@
                             <h3 class="card-title fs-18 pb-2">Course Features</h3>
                             <div class="divider"><span></span></div>
                             <ul class="generic-list-item generic-list-item-flash">
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-clock mr-2 text-color"></i>Duration</span> 2.5 hours</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-play-circle-o mr-2 text-color"></i>Lectures</span> 17</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-file-text-o mr-2 text-color"></i>Resources</span> 12</li>
+                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-clock mr-2 text-color"></i>Duration</span> {{ $course->duration }} hours</li>
+
+                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-file-text-o mr-2 text-color"></i>Resources</span>{{ $course->resources }} </li>
                                 <li class="d-flex align-items-center justify-content-between"><span><i class="la la-bolt mr-2 text-color"></i>Quizzes</span> 26</li>
                                 <li class="d-flex align-items-center justify-content-between"><span><i class="la la-eye mr-2 text-color"></i>Preview Lessons</span> 4</li>
                                 <li class="d-flex align-items-center justify-content-between"><span><i class="la la-language mr-2 text-color"></i>Language</span> English</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-lightbulb mr-2 text-color"></i>Skill level</span> All levels</li>
+                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-lightbulb mr-2 text-color"></i>Skill level</span> {{ $course->label }}</li>
                                 <li class="d-flex align-items-center justify-content-between"><span><i class="la la-users mr-2 text-color"></i>Students</span> 30,506</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-certificate mr-2 text-color"></i>Certificate</span> Yes</li>
+                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-certificate mr-2 text-color"></i>Certificate</span> {{ $course->certificate }}</li>
                             </ul>
                         </div>
                     </div><!-- end card -->
@@ -749,14 +535,9 @@
                             <h3 class="card-title fs-18 pb-2">Course Categories</h3>
                             <div class="divider"><span></span></div>
                             <ul class="generic-list-item">
-                                <li><a href="#">Development</a></li>
-                                <li><a href="#">Web Design</a></li>
-                                <li><a href="#">Technology</a></li>
-                                <li><a href="#">IT & Software</a></li>
-                                <li><a href="#">Backend</a></li>
-                                <li><a href="#">Marketing</a></li>
-                                <li><a href="#">Photography</a></li>
-                                <li><a href="#">Frontend</a></li>
+                            @foreach( $categories as $cat)
+                                <li><a href="#">{{ $cat->category_name }}</a></li>
+                            @endforeach
                             </ul>
                         </div>
                     </div><!-- end card -->
@@ -764,58 +545,30 @@
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Related Courses</h3>
                             <div class="divider"><span></span></div>
+                            @foreach ($relatedCourses as $related )
+
+
                             <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
                                 <a href="course-details.html" class="media-img">
-                                    <img class="mr-3 lazy" src="images/img-loading.png" data-src="images/small-img-2.jpg" alt="Related course image">
+                                    <img class="mr-3 lazy" src="{{ asset($related->course_image) }}" data-src="{{ asset($related->course_image) }}" alt="Related course image">
                                 </a>
                                 <div class="media-body">
-                                    <h5 class="fs-15"><a href="course-details.html">The Complete JavaScript Course 2021</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Kamran Ahmed</span>
-                                    <p class="text-black font-weight-semi-bold lh-18 fs-15">$12.99 <span class="before-price fs-14">$129.99</span></p>
+                                    <h5 class="fs-15"><a href="course-details.html">{{ $related->course_name }}</a></h5>
+                                    <span class="d-block lh-18 py-1 fs-14">{{ $related['user']['name'] }}</span>
+                                      @if ($related->discount_price == NULL)
+                <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->selling_price }}  </p>
+                @else
+                <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->discount_price }} <span class="before-price fs-14">${{ $related->selling_price }}</span></p>
+                @endif
                                 </div>
                             </div><!-- end media -->
-                            <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                <a href="course-details.html" class="media-img">
-                                    <img class="mr-3 lazy" src="images/img-loading.png" data-src="images/small-img-3.jpg" alt="Related course image">
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="fs-15"><a href="course-details.html">Learning jQuery Mobile for Beginners</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Kamran Ahmed</span>
-                                    <p class="text-black font-weight-semi-bold lh-18 fs-15">$129.99</p>
-                                </div>
-                            </div><!-- end media -->
-                            <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                <a href="course-details.html" class="media-img">
-                                    <img class="mr-3 lazy" src="images/img-loading.png" data-src="images/small-img-4.jpg" alt="Related course image">
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="fs-15"><a href="course-details.html">Introduction LearnPress – LMS plugin</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Kamran Ahmed</span>
-                                    <p class="text-black font-weight-semi-bold lh-18 fs-15">Free</p>
-                                </div>
-                            </div><!-- end media -->
+                            @endforeach
                             <div class="view-all-course-btn-box">
                                 <a href="course-grid.html" class="btn theme-btn w-100">View All Courses <i class="la la-arrow-right icon ml-1"></i></a>
                             </div>
                         </div>
                     </div><!-- end card -->
-                    <div class="card card-item">
-                        <div class="card-body">
-                            <h3 class="card-title fs-18 pb-2">Course Tags</h3>
-                            <div class="divider"><span></span></div>
-                            <ul class="generic-list-item generic-list-item-boxed d-flex flex-wrap fs-15">
-                                <li class="mr-2"><a href="#">Beginner</a></li>
-                                <li class="mr-2"><a href="#">Advanced</a></li>
-                                <li class="mr-2"><a href="#">Tips</a></li>
-                                <li class="mr-2"><a href="#">Photoshop</a></li>
-                                <li class="mr-2"><a href="#">Software</a></li>
-                                <li class="mr-2"><a href="#">Backend</a></li>
-                                <li class="mr-2"><a href="#">Freelance</a></li>
-                                <li class="mr-2"><a href="#">Frontend</a></li>
-                                <li class="mr-2"><a href="#">Technology</a></li>
-                            </ul>
-                        </div>
-                    </div><!-- end card -->
+                 
                 </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
         </div><!-- end row -->
@@ -831,22 +584,39 @@
 <section class="related-course-area bg-gray pt-60px pb-60px">
     <div class="container">
         <div class="related-course-wrap">
-            <h3 class="fs-28 font-weight-semi-bold pb-35px">More Courses by <a href="teacher-detail.html" class="text-color hover-underline">Tim Buchalka</a></h3>
+            <h3 class="fs-28 font-weight-semi-bold pb-35px">More Courses by <a href="teacher-detail.html" class="text-color hover-underline">{{ $course['user']['name'] }}</a></h3>
             <div class="view-more-carousel-2 owl-action-styled">
+            @foreach ( $instructorCourses as $inscourse )
+            @php
+                $amount = $inscourse->selling_price - $inscourse->discount_price;
+                $discount = ($amount/$inscourse->selling_price) * 100;
+            @endphp
+
                 <div class="card card-item">
                     <div class="card-image">
-                        <a href="course-details.html" class="d-block">
-                            <img class="card-img-top" src="images/img8.jpg" alt="Card image cap">
+                        <a href="{{ url('course/details/'.$inscourse->id.'/'.$inscourse->course_name_slug) }}" class="d-block">
+                            <img class="card-img-top" src="{{ asset($inscourse->course_image) }}" alt="Card image cap">
                         </a>
                         <div class="course-badge-labels">
-                            <div class="course-badge">Bestseller</div>
-                            <div class="course-badge blue">-39%</div>
+                                        @if ($inscourse->bestseller == 1)
+
+                                        <div class="course-badge">Bestseller</div>
+                                        @else
+
+                                        @endif
+                                        @if ($inscourse->discount_price == NULL)
+                                        <div class="course-badge blue">new</div>
+                                        @else
+                                        <div class="course-badge blue">{{ round($discount) }}%</div>
+
+                                        @endif
+
                         </div>
                     </div><!-- end card-image -->
                     <div class="card-body">
-                        <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                        <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                        <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
+                        <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{$inscourse->label}}</h6>
+                        <h5 class="card-title"><a href="{{ url('course/details/'.$inscourse->id.'/'.$inscourse->course_name_slug) }}">{{$inscourse->course_name}}</a></h5>
+                        <p class="card-text"><a href="teacher-detail.html">{{$inscourse['user']['name']}}</a></p>
                         <div class="rating-wrap d-flex align-items-center py-2">
                             <div class="review-stars">
                                 <span class="rating-number">4.4</span>
@@ -860,101 +630,17 @@
                         </div><!-- end rating-wrap -->
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="card-price text-black font-weight-bold">12.99 <span class="before-price font-weight-medium">129.99</span></p>
+
+                    @if ($inscourse->discount_price == NULL)
+                    <p class="card-price text-black font-weight-bold">${{ $inscourse->selling_price }}  </p>
+                    @else
+                    <p class="card-price text-black font-weight-bold">${{ $inscourse->discount_price }} <span class="before-price font-weight-medium">${{ $inscourse->selling_price }}</span></p>
+                    @endif
                             <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
                         </div>
                     </div><!-- end card-body -->
                 </div><!-- end card -->
-                <div class="card card-item">
-                    <div class="card-image">
-                        <a href="course-details.html" class="d-block">
-                            <img class="card-img-top" src="images/img9.jpg" alt="Card image cap">
-                        </a>
-                        <div class="course-badge-labels">
-                            <div class="course-badge red">Featured</div>
-                        </div>
-                    </div><!-- end card-image -->
-                    <div class="card-body">
-                        <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                        <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                        <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
-                        <div class="rating-wrap d-flex align-items-center py-2">
-                            <div class="review-stars">
-                                <span class="rating-number">4.4</span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
-                            </div>
-                            <span class="rating-total pl-1">(20,230)</span>
-                        </div><!-- end rating-wrap -->
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="card-price text-black font-weight-bold">129.99</p>
-                            <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                        </div>
-                    </div><!-- end card-body -->
-                </div><!-- end card -->
-                <div class="card card-item">
-                    <div class="card-image">
-                        <a href="course-details.html" class="d-block">
-                            <img class="card-img-top" src="images/img8.jpg" alt="Card image cap">
-                        </a>
-                        <div class="course-badge-labels">
-                            <div class="course-badge">Bestseller</div>
-                            <div class="course-badge blue">-39%</div>
-                        </div>
-                    </div><!-- end card-image -->
-                    <div class="card-body">
-                        <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                        <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                        <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
-                        <div class="rating-wrap d-flex align-items-center py-2">
-                            <div class="review-stars">
-                                <span class="rating-number">4.4</span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
-                            </div>
-                            <span class="rating-total pl-1">(20,230)</span>
-                        </div><!-- end rating-wrap -->
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="card-price text-black font-weight-bold">12.99 <span class="before-price font-weight-medium">129.99</span></p>
-                            <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                        </div>
-                    </div><!-- end card-body -->
-                </div><!-- end card -->
-                <div class="card card-item">
-                    <div class="card-image">
-                        <a href="course-details.html" class="d-block">
-                            <img class="card-img-top" src="images/img9.jpg" alt="Card image cap">
-                        </a>
-                        <div class="course-badge-labels">
-                            <div class="course-badge red">Featured</div>
-                        </div>
-                    </div><!-- end card-image -->
-                    <div class="card-body">
-                        <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">All Levels</h6>
-                        <h5 class="card-title"><a href="course-details.html">The Business Intelligence Analyst Course 2021</a></h5>
-                        <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
-                        <div class="rating-wrap d-flex align-items-center py-2">
-                            <div class="review-stars">
-                                <span class="rating-number">4.4</span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
-                            </div>
-                            <span class="rating-total pl-1">(20,230)</span>
-                        </div><!-- end rating-wrap -->
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="card-price text-black font-weight-bold">129.99</p>
-                            <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                        </div>
-                    </div><!-- end card-body -->
-                </div><!-- end card -->
+ @endforeach
             </div><!-- end view-more-carousel -->
         </div><!-- end related-course-wrap -->
     </div><!-- end container -->
@@ -1009,7 +695,7 @@
                 <div class="copy-to-clipboard">
                     <span class="success-message">Copied!</span>
                     <div class="input-group">
-                        <input type="text" class="form-control form--control copy-input pl-3" value="https://www.aduca.com/share/101WxMB0oac1hVQQ==/">
+                        <input type="text" class="form-control form--control copy-input pl-3" value="http://127.0.0.1:8000/{{ Request::path() }}">
                         <div class="input-group-append">
                             <button class="btn theme-btn theme-btn-sm copy-btn shadow-none"><i class="la la-copy mr-1"></i> Copy</button>
                         </div>
@@ -1034,18 +720,17 @@
             <div class="modal-header border-bottom-gray">
                 <div class="pr-2">
                     <p class="pb-2 font-weight-semi-bold">Course Preview</p>
-                    <h5 class="modal-title fs-19 font-weight-semi-bold lh-24" id="previewModalTitle">Java Programming Masterclass for Software Developers</h5>
+                    <h5 class="modal-title fs-19 font-weight-semi-bold lh-24" id="previewModalTitle">{{ $course->course_name }}</h5>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="la la-times"></span>
                 </button>
             </div><!-- end modal-header -->
             <div class="modal-body">
-                <video controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+                <video controls crossorigin playsinline poster="{{ asset($course->course_image) }}" id="player">
                     <!-- Video files -->
-                    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4"/>
-                    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4"/>
-                    <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4"/>
+                    <source src="{{ asset($course->video) }}" type="video/mp4"/>
+
                 </video>
             </div><!-- end modal-body -->
         </div><!-- end modal-content -->
