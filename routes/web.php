@@ -105,6 +105,8 @@ Route::controller(CourseController::class)->group(function(){
 
 
 
+
+
 //category group controller added bu eenas
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/all/category','AllCategory')->name('all.category');
@@ -134,6 +136,13 @@ Route::controller(AdminController::class)->group(function(){
 ////// Route Accesable for all
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
 
-////// Route Accesable for all section 16 added by Enas ^_^
+////// Route Accesable for all section 16 added by Enas 
 Route::get('/course/details/{id}/{slug}',[IndexController::class,'CourseDetails']);
+
+//owies
+Route::get('/category/{id}/{slug}',[IndexController::class,'CategoryCourse']);
+Route::get('/subcategory/{id}/{slug}',[IndexController::class,'SubCategoryCourse']);
+Route::get('/instructor/details/{id}',[IndexController::class,'InstructorDetails'])->name('instructor.details');
+//owies
+
 

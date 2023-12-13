@@ -25,6 +25,5 @@ class Course extends Model
     }
 
 
-
 }
 //AGHA
