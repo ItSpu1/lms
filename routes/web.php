@@ -8,6 +8,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\CourseController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\WishListController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,7 +38,15 @@ Route::get('/user/logout',[UserController::class,'UserLogout'])->name('user.logo
 Route::get('/user/change/password',[UserController::class,'UserChangePassword'])->name('user.change.password');
 Route::post('/user/password/update',[UserController::class,'UserPasswordUpdate'])->name('user.password.update');
 
+//user WishList all route
+Route::controller(WishListController::class)->group(function(){
+    Route::get('/user/wishlist','AllWishlist')->name('user.wishlist');
+    Route::get('/get-wishlist-course/','GetWishlistCourse');
+    Route::get('/wishlist-remove/{id}','RemoveWishlist');
+   
 });
+
+});//end auth
 
 require __DIR__.'/auth.php';
 
@@ -146,3 +157,5 @@ Route::get('/instructor/details/{id}',[IndexController::class,'InstructorDetails
 //owies
 
 
+//wish list adding AGHA
+Route::post('/add-to-wishlist/{id}',[WishListController::class,'AddToWishList']);
