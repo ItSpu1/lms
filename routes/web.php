@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\CourseController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
+use App\Http\Controllers\Frontend\CartController;
 
 
 /*
@@ -38,12 +39,12 @@ Route::get('/user/logout',[UserController::class,'UserLogout'])->name('user.logo
 Route::get('/user/change/password',[UserController::class,'UserChangePassword'])->name('user.change.password');
 Route::post('/user/password/update',[UserController::class,'UserPasswordUpdate'])->name('user.password.update');
 
-//user WishList all route
+//user WishList all route added by agha
 Route::controller(WishListController::class)->group(function(){
     Route::get('/user/wishlist','AllWishlist')->name('user.wishlist');
     Route::get('/get-wishlist-course/','GetWishlistCourse');
     Route::get('/wishlist-remove/{id}','RemoveWishlist');
-   
+
 });
 
 });//end auth
@@ -147,7 +148,7 @@ Route::controller(AdminController::class)->group(function(){
 ////// Route Accesable for all
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
 
-////// Route Accesable for all section 16 added by Enas 
+////// Route Accesable for all section 16 added by Enas
 Route::get('/course/details/{id}/{slug}',[IndexController::class,'CourseDetails']);
 
 //owies
@@ -157,5 +158,17 @@ Route::get('/instructor/details/{id}',[IndexController::class,'InstructorDetails
 //owies
 
 
-//wish list adding AGHA
+//wish list adding AGHA Route accesbale for all
 Route::post('/add-to-wishlist/{id}',[WishListController::class,'AddToWishList']);
+//enas
+Route::post('/cart/data/store/{id}',[CartController::class,'AddToCart']);
+Route::get('/cart/data/',[CartController::class,'CartData']);
+//get data from mini cart
+Route::get('/course/mini/cart',[CartController::class,'AddMiniCart']);
+Route::get('/minicart/course/remove/{rowId}',[CartController::class,'RemoveMiniCart']);
+//Cart all route
+Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart','MyCart')->name('mycart');
+    Route::get('/get-cart-course','GetCartCourse');
+    Route::get('/cart-remove/{rowId}','CartRemove');
+});

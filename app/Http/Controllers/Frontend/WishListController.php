@@ -20,7 +20,7 @@ class WishListController extends Controller
     public function AddToWishList(Request $request, $course_id){
         if (Auth::check()) {
             $exists = Wishlist::where('user_id',Auth::id())->where('course_id',$course_id)->first();
-        
+
             if (!$exists){
                 Wishlist::insert([
                     'user_id' => Auth::id(),
@@ -30,7 +30,7 @@ class WishListController extends Controller
                 return response()->json(['success' => 'Successfully Added on your Wishlist']);
             }
             else{
-                return response()->json(['error' => 'This Product Has Already on your Wishlist']);                
+                return response()->json(['error' => 'This Course Has Already on your Wishlist']);
             }
         }
             else{
