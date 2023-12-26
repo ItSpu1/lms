@@ -13,7 +13,6 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\backend\CouponController;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -205,9 +204,11 @@ Route::controller(CartController::class)->group(function(){
     Route::get('/cart-remove/{rowId}','CartRemove');
 });
 
-
-
+//Coupon Route
 Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
 Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 
+//Checkout Page Route 
+Route::get('/checkout',[CartController::class,'CheckoutCreate'])->name('checkout');
+Route::post('/payment',[CartController::class,'Payment'])->name('payment');
