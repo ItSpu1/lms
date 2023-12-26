@@ -487,10 +487,11 @@
                                 <p class="preview-price-discount-text pb-35px">
                                     <span class="text-color-3">4 days</span> left at this price!
                                 </p>
-                                <div class="buy-course-btn-box">
-                                    <button type="button" class="btn theme-btn w-100 mb-2"><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
-                                    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
-                                </div>
+<div class="buy-course-btn-box">
+    <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart({{ $course->id }},'{{ $course->course_name }}' ,'{{ $course->instructor_id }}' ,'{{ $course->course_name_slug }}')"><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
+
+    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+</div>
                                 <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                                 <div class="preview-course-incentives">
                                     <h3 class="card-title fs-18 pb-2">This course includes</h3>
@@ -560,9 +561,15 @@
                 @else
                 <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->discount_price }} <span class="before-price fs-14">${{ $related->selling_price }}</span></p>
                 @endif
+
+
+
                                 </div>
                             </div><!-- end media -->
                             @endforeach
+
+
+
                             <div class="view-all-course-btn-box">
                                 <a href="course-grid.html" class="btn theme-btn w-100">View All Courses <i class="la la-arrow-right icon ml-1"></i></a>
                             </div>

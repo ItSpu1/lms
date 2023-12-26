@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Course;
+
 
 class AdminController extends Controller
 {
     public function AdminDashboard(){
         return view ('admin.index');
 
-    }
+    }// End Method
     public function AdminLogout(Request $request)
     {
         Auth::guard('web')->logout();
@@ -24,15 +26,15 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/admin/login');
-    }
+    }// End Method
     public function AdminLogin(){
         return view('admin.admin_login');
-    }
+    }// End Method
     public function AdminProfile(){
         $id =Auth::user()->id;
         $profileData= User::find($id);
         return view('admin.admin_profile_view',compact('profileData'));
-    }
+    }// End Method
     public function AdminProfileStore(Request $request){
         $id=Auth::user()->id;
         $data =User::find($id);
@@ -55,13 +57,13 @@ class AdminController extends Controller
             );
 
             return redirect()->back()->with($notification);
-    }
+    }// End Method
     public function AdminChangePassword(){
         $id =Auth::user()->id;
         $profileData= User::find($id);
         return view('admin.admin_change_password',compact('profileData'));
 
-    }
+    }// End Method
     public function AdminPasswordUpdate(Request $request){
         //validation
         $request->validate([
@@ -86,13 +88,14 @@ class AdminController extends Controller
     );
     return redirect()->back()->with($notification);
 
-    }
+    }// End Method
+
     //start owies
     public function BecomeInstructor(){
 
         return view('frontend.instructor.reg_instructor');
 
-    }
+    }// End Method
     public function InstructorRegister(Request $request){
 
        
@@ -122,7 +125,8 @@ class AdminController extends Controller
         return redirect()->route('instructor.login')->with($notification);
 
 
-    }  //end owies
+    }// End Method  
+    //end owies
 
 
     // owies mndeno hahahah section 10
@@ -134,7 +138,8 @@ class AdminController extends Controller
 
 
 
-    } // owies section 10
+    }// End Method 
+    // owies section 10
     public function UpdateUserStatus(Request $request){
 
         $userId = $request->input('user_id');
@@ -150,8 +155,38 @@ class AdminController extends Controller
 
     }// End Method
 
-}
+    public function AdminAllCourse(){
+
+        $course =Course::latest()->get();
+        return view('admin.backend.courses.all_course',compact('course'));
+    }// End Method
 
 
+    public function UpdateCourseStatus(Request $request){
+
+        $courseId = $request->input('course_id');
+        $isChecked = $request->input('is_checked',0);
+
+        $course = Course::find($courseId);
+        if ($course) {
+            $course->status = $isChecked;
+            $course->save();
+        }
+
+        return response()->json(['message' => 'Course Status Updated Successfully']);
+
+    }// End Method
+
+
+    public function AdminCourseDetails($id){
+
+        $course =Course::find($id);
+        return view('admin.backend.courses.course_details',compact('course'));
+    }
     //end owies
 
+
+
+
+    
+}

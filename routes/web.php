@@ -10,6 +10,8 @@ use App\Http\Controllers\backend\CourseController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\backend\CouponController;
+
 
 
 /*
@@ -145,6 +147,36 @@ Route::controller(AdminController::class)->group(function(){
     Route::get('/all/instructor','AllInstructor')->name('all.instructor');
     Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
 });
+
+
+////owies admin courses section 25
+Route::controller(AdminController::class)->group(function(){
+    Route::get('/admin/all/course','AdminAllCourse')->name('admin.all.course');
+    Route::post('/update/course/status','UpdateCourseStatus')->name('update.course.status');
+    Route::get('/admin/course/details/{id}','AdminCourseDetails')->name('admin.course.details');
+   
+    
+});
+////owies admin courses section 25
+
+////owies admin coupon section 26
+Route::controller(CouponController::class)->group(function(){
+    Route::get('/admin/all/coupon','AdminAllCoupon')->name('admin.all.coupon');
+    Route::get('/admin/add/coupon','AdminAddCoupon')->name('admin.add.coupon');
+    Route::post('/admin/store/coupon', 'AdminStoreCoupon')->name('admin.store.coupon');
+    Route::get('/admin/edit/coupon/{id}','AdminEditCoupon')->name('admin.edit.coupon');
+    Route::post('/admin/update/coupon','AdminUpdateCoupon')->name('admin.update.coupon');
+    Route::get('/admin/delete/coupon/{id}','AdminDeleteCoupon')->name('admin.delete.coupon');
+    
+});
+////owies section 26
+
+
+
+
+
+
+
 ////// Route Accesable for all
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
 
@@ -172,3 +204,10 @@ Route::controller(CartController::class)->group(function(){
     Route::get('/get-cart-course','GetCartCourse');
     Route::get('/cart-remove/{rowId}','CartRemove');
 });
+
+
+
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
+Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+

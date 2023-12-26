@@ -425,6 +425,6 @@
     </div>
 </div><!-- end tooltip_templates -->
     @endforeach
-
+ 
 
 @endsection
