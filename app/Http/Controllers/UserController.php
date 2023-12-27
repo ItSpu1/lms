@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-public function Public(){
-    return view('frontend.public');
+public function Index(){
+    return view('frontend.index');
 }
 public function UserProfile(){
     $id =Auth::user()->id;

@@ -124,9 +124,9 @@
                            <span class="collapse-btn-show">Show less<i class="la la-angle-up ml-1 fs-14"></i></span>
                        </a>
                    </div><!-- end course-overview-card -->
-                   @php
-                        $lecture=App\Models\CourseLecture::where('course_id',$course->id)->get();
-                   @endphp
+    @php
+        $lecture=App\Models\CourseLecture::where('course_id',$course->id)->get();
+    @endphp
                    <div class="course-overview-card">
                        <div class="curriculum-header d-flex align-items-center justify-content-between pb-4">
                            <h3 class="fs-24 font-weight-semi-bold">Course content</h3>
@@ -136,9 +136,9 @@
                            </div>
                        </div>
 
-@php
- $section=App\Models\CourseSection::where('course_id',$course->id)->orderby('id','asc')->get();
-@endphp
+    @php
+    $section=App\Models\CourseSection::where('course_id',$course->id)->orderby('id','asc')->get();
+    @endphp
 
                        <div class="curriculum-content">
                            <div id="accordion" class="generic-accordion">
@@ -156,24 +156,20 @@
                         <span class="fs-15 text-gray font-weight-medium">{{ count($lecture) }} lectures</span>
                     </button>
                 </div><!-- end card-header -->
-                <div id="collapse{{ $sec->id }}" class="collapse show" aria-labelledby="heading{{ $sec->id }}" data-parent="#accordion">
+                <div id="collapse{{ $sec->id }}" class="collapse " aria-labelledby="heading{{ $sec->id }}" data-parent="#accordion">
                     <div class="card-body">
                         <ul class="generic-list-item">
-                        @foreach ($lecture as $lect )
-
-
+                           @foreach ($lecture as $lect) 
                             <li>
-                                <a href="#" class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center justify-content-between">
                                     <span>
                                         <i class="la la-play-circle mr-1"></i>
                                        {{ $lect->lecture_title }}
-
-                                     </span>
-                                    <span>02:27</span>
-                                </a>
+                                    </span>
+                                    <span>03:09</span>
+                                </div>
                             </li>
-
-                         @endforeach
+                            @endforeach 
                         </ul>
                     </div><!-- end card-body -->
                 </div><!-- end collapse -->
@@ -490,7 +486,7 @@
 <div class="buy-course-btn-box">
     <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart({{ $course->id }},'{{ $course->course_name }}' ,'{{ $course->instructor_id }}' ,'{{ $course->course_name_slug }}')"><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
 
-    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"  onclick="buyCourse({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
 </div>
                                 <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                                 <div class="preview-course-incentives">

@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\backend\SettingController;
+use App\Http\Controllers\Backend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ use App\Http\Controllers\backend\SettingController;
 //    return view('welcome');
 //});
 
-Route::get('/',[UserController::class,'Public'])->name('public');
+Route::get('/',[UserController::class,'Index'])->name('index');
 
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.index');})->middleware(['auth', 'verified'])->name('dashboard');
@@ -61,16 +62,105 @@ Route::get('/admin/profile',[AdminController::class,'AdminProfile'])->name('admi
 Route::post('/admin/profile/store',[AdminController::class,'AdminProfileStore'])->name('admin.profile.store');
 Route::get('/admin/change/password',[AdminController::class,'AdminChangePassword'])->name('admin.change.password');
 Route::post('/admin/password/update',[AdminController::class,'AdminPasswordUpdate'])->name('admin.password.update');
+
+
+//category group controller added bu eenas
+Route::controller(CategoryController::class)->group(function(){
+    Route::get('/all/category','AllCategory')->name('all.category');
+    Route::get('/add/category','AddCategory')->name('add.category');
+    Route::post('/store/category','StoreCategory')->name('store.category');
+    Route::get('/edit/category/{id}','EditCategory')->name('edit.category');
+    Route::post('/update/category','UpdateCategory')->name('update.category');
+    Route::get('/delete/category/{id}','DeleteCategory')->name('delete.category');
+
 });
 
 
+
+//SubCategory Added By enas section 8
+Route::controller(CategoryController::class)->group(function(){
+    Route::get('/all/subcategory','AllSubCategory')->name('all.subcategory');
+    Route::get('/add/subcategory','AddSubCategory')->name('add.subcategory');
+    Route::post('/store/subcategory','StoreSubCategory')->name('store.subcategory');
+    Route::get('/edit/subcategory/{id}','EditSubCategory')->name('edit.subcategory');
+    Route::post('/update/subcategory','UpdateSubCategory')->name('update.subcategory');
+    Route::get('/delete/subcategory/{id}','DeleteSubCategory')->name('delete.subcategory');
+});
+
+
+
+
+
+//Instructor all route Added By owies section 10
+Route::controller(AdminController::class)->group(function(){
+    Route::get('/all/instructor','AllInstructor')->name('all.instructor');
+    Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
+});
+
+
+
+
+
+////owies admin courses section 25
+Route::controller(AdminController::class)->group(function(){
+    Route::get('/admin/all/course','AdminAllCourse')->name('admin.all.course');
+    Route::post('/update/course/status','UpdateCourseStatus')->name('update.course.status');
+    Route::get('/admin/course/details/{id}','AdminCourseDetails')->name('admin.course.details');
+
+
+});
+////owies admin courses section 25
+
+
+
+////owies admin coupon section 26
+Route::controller(CouponController::class)->group(function(){
+    Route::get('/admin/all/coupon','AdminAllCoupon')->name('admin.all.coupon');
+    Route::get('/admin/add/coupon','AdminAddCoupon')->name('admin.add.coupon');
+    Route::post('/admin/store/coupon', 'AdminStoreCoupon')->name('admin.store.coupon');
+    Route::get('/admin/edit/coupon/{id}','AdminEditCoupon')->name('admin.edit.coupon');
+    Route::post('/admin/update/coupon','AdminUpdateCoupon')->name('admin.update.coupon');
+    Route::get('/admin/delete/coupon/{id}','AdminDeleteCoupon')->name('admin.delete.coupon');
+
+});
+////owies section 26
+
+
+
+
+///enas section 31
+Route::controller(SettingController::class)->group(function(){
+    Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
+    Route::post('/update/smtp','SmtpSetting')->name('update.smtp');
+
+});
+
+
+
+// Admin All Order Route 
+Route::controller(OrderController::class)->group(function(){
+    Route::get('/admin/pending/order','AdminPendingOrder')->name('admin.pending.order'); 
+    Route::get('/admin/order/details/{id}','AdminOrderDetails')->name('admin.order.details'); 
+    Route::get('/pending-confirm/{id}','PendingToConfirm')->name('pending-confirm'); 
+    Route::get('/admin/confirm/order','AdminConfirmOrder')->name('admin.confirm.order'); 
+
+
+
+});
+
+
+
+
+
+
+
+}); // End Admin Group Middleware
 
 
 Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
 
 //owies
 Route::get('/become/instructor',[AdminController::class,'BecomeInstructor'])->name('become.instructor');
-
 Route::post('/instructor/register',[AdminController::class,'InstructorRegister'])->name('instructor.register');
 //owies
 
@@ -83,6 +173,7 @@ Route::get('/instructor/profile',[InstructorController::class,'InstructorProfile
 Route::post('/instructor/profile/store',[InstructorController::class,'InstructorProfileStore'])->name('instructor.profile.store');
 Route::get('/instructor/change/password',[InstructorController::class,'InstructorChangePassword'])->name('instructor.change.password');
 Route::post('/instructor/password/update',[InstructorController::class,'InstructorPasswordUpdate'])->name('instructor.password.update');
+
 //AGHA
 Route::controller(CourseController::class)->group(function(){
     Route::get('/all/course','AllCourse')->name('all.course');
@@ -114,67 +205,11 @@ Route::controller(CourseController::class)->group(function(){
 
 
 
-});
 
 
 
 
-
-//category group controller added bu eenas
-Route::controller(CategoryController::class)->group(function(){
-    Route::get('/all/category','AllCategory')->name('all.category');
-    Route::get('/add/category','AddCategory')->name('add.category');
-    Route::post('/store/category','StoreCategory')->name('store.category');
-    Route::get('/edit/category/{id}','EditCategory')->name('edit.category');
-    Route::post('/update/category','UpdateCategory')->name('update.category');
-    Route::get('/delete/category/{id}','DeleteCategory')->name('delete.category');
-
-});
-//SubCategory Added By enas section 8
-Route::controller(CategoryController::class)->group(function(){
-    Route::get('/all/subcategory','AllSubCategory')->name('all.subcategory');
-    Route::get('/add/subcategory','AddSubCategory')->name('add.subcategory');
-    Route::post('/store/subcategory','StoreSubCategory')->name('store.subcategory');
-    Route::get('/edit/subcategory/{id}','EditSubCategory')->name('edit.subcategory');
-    Route::post('/update/subcategory','UpdateSubCategory')->name('update.subcategory');
-    Route::get('/delete/subcategory/{id}','DeleteSubCategory')->name('delete.subcategory');
-});
-
-
-//Instructor all route Added By owies section 10
-Route::controller(AdminController::class)->group(function(){
-    Route::get('/all/instructor','AllInstructor')->name('all.instructor');
-    Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
-});
-
-
-////owies admin courses section 25
-Route::controller(AdminController::class)->group(function(){
-    Route::get('/admin/all/course','AdminAllCourse')->name('admin.all.course');
-    Route::post('/update/course/status','UpdateCourseStatus')->name('update.course.status');
-    Route::get('/admin/course/details/{id}','AdminCourseDetails')->name('admin.course.details');
-
-
-});
-////owies admin courses section 25
-
-////owies admin coupon section 26
-Route::controller(CouponController::class)->group(function(){
-    Route::get('/admin/all/coupon','AdminAllCoupon')->name('admin.all.coupon');
-    Route::get('/admin/add/coupon','AdminAddCoupon')->name('admin.add.coupon');
-    Route::post('/admin/store/coupon', 'AdminStoreCoupon')->name('admin.store.coupon');
-    Route::get('/admin/edit/coupon/{id}','AdminEditCoupon')->name('admin.edit.coupon');
-    Route::post('/admin/update/coupon','AdminUpdateCoupon')->name('admin.update.coupon');
-    Route::get('/admin/delete/coupon/{id}','AdminDeleteCoupon')->name('admin.delete.coupon');
-
-});
-////owies section 26
-///enas section 31
-Route::controller(SettingController::class)->group(function(){
-    Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
-    Route::post('/update/smtp','SmtpUpdate')->name('update.smtp');
-
-});
+});// End Instructor Group Middleware
 
 
 
@@ -196,12 +231,20 @@ Route::get('/instructor/details/{id}',[IndexController::class,'InstructorDetails
 
 //wish list adding AGHA Route accesbale for all
 Route::post('/add-to-wishlist/{id}',[WishListController::class,'AddToWishList']);
+
+
 //enas
 Route::post('/cart/data/store/{id}',[CartController::class,'AddToCart']);
+Route::post('/buy/data/store/{id}', [CartController::class, 'BuyToCart']);
+
 Route::get('/cart/data/',[CartController::class,'CartData']);
+
+
 //get data from mini cart
 Route::get('/course/mini/cart',[CartController::class,'AddMiniCart']);
 Route::get('/minicart/course/remove/{rowId}',[CartController::class,'RemoveMiniCart']);
+
+
 //Cart all route
 Route::controller(CartController::class)->group(function(){
     Route::get('/mycart','MyCart')->name('mycart');
@@ -217,3 +260,5 @@ Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 //Checkout Page Route
 Route::get('/checkout',[CartController::class,'CheckoutCreate'])->name('checkout');
 Route::post('/payment',[CartController::class,'Payment'])->name('payment');
+
+///// End Route Accessable for All 
