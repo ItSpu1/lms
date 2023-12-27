@@ -11,7 +11,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\backend\CouponController;
-
+use App\Http\Controllers\backend\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,8 +153,8 @@ Route::controller(AdminController::class)->group(function(){
     Route::get('/admin/all/course','AdminAllCourse')->name('admin.all.course');
     Route::post('/update/course/status','UpdateCourseStatus')->name('update.course.status');
     Route::get('/admin/course/details/{id}','AdminCourseDetails')->name('admin.course.details');
-   
-    
+
+
 });
 ////owies admin courses section 25
 
@@ -166,10 +166,15 @@ Route::controller(CouponController::class)->group(function(){
     Route::get('/admin/edit/coupon/{id}','AdminEditCoupon')->name('admin.edit.coupon');
     Route::post('/admin/update/coupon','AdminUpdateCoupon')->name('admin.update.coupon');
     Route::get('/admin/delete/coupon/{id}','AdminDeleteCoupon')->name('admin.delete.coupon');
-    
+
 });
 ////owies section 26
+///enas section 31
+Route::controller(SettingController::class)->group(function(){
+    Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
+    Route::post('/update/smtp','SmtpUpdate')->name('update.smtp');
 
+});
 
 
 
@@ -209,6 +214,6 @@ Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
 Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 
-//Checkout Page Route 
+//Checkout Page Route
 Route::get('/checkout',[CartController::class,'CheckoutCreate'])->name('checkout');
 Route::post('/payment',[CartController::class,'Payment'])->name('payment');

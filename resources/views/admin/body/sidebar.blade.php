@@ -37,7 +37,7 @@
 
 					</ul>
 				</li>
-			
+
 
 
 				<li>
@@ -49,10 +49,10 @@
 					<ul>
 						<li> <a href="{{ route('all.instructor') }}"><i class='bx bx-radio-circle'></i>All Instructor</a>
 						</li>
-						
+
 					</ul>
 				</li>
-				
+
 
 				<li>
 					<a class="has-arrow" href="javascript:;">
@@ -63,11 +63,11 @@
 					<ul>
 						<li> <a href="{{ route('admin.all.course') }}"><i class='bx bx-radio-circle'></i>All Courses</a>
 						</li>
-						
+
 					</ul>
 				</li>
 
-				
+
 
 
 
@@ -81,11 +81,21 @@
 					<ul>
 						<li> <a href="{{ route('admin.all.coupon') }}"><i class='bx bx-radio-circle'></i>All Coupon</a>
 						</li>
-						
+
 					</ul>
 				</li>
+                <li>
+					<a class="has-arrow" href="javascript:;">
+						<div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+						</div>
+						<div class="menu-title">Manage Setting</div>
+					</a>
+					<ul>
+						<li> <a href="{{ route('smtp.setting') }}"><i class='bx bx-radio-circle'></i>Smtp Setting</a>
+						</li>
 
-
+					</ul>
+				</li>
 				</li>
 
 				<li class="menu-label">Charts & Maps</li>
