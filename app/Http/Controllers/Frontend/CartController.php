@@ -161,8 +161,6 @@ class CartController extends Controller
         }
 
     }// End Method 
-
-
     public function CouponCalculation(){
 
         if (Session::has('coupon')) {
