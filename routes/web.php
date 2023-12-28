@@ -49,7 +49,14 @@ Route::controller(WishListController::class)->group(function(){
 
 });
 
-});//end auth
+//User My Course All Route 
+Route::controller(OrderController::class)->group(function(){
+    Route::get('/my/course','MyCourse')->name('my.course');
+
+});
+
+
+});//end auth middleware
 
 require __DIR__.'/auth.php';
 
