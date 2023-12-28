@@ -49,10 +49,10 @@ Route::controller(WishListController::class)->group(function(){
 
 });
 
-//User My Course All Route 
+//User My Course All Route  by enas
 Route::controller(OrderController::class)->group(function(){
     Route::get('/my/course','MyCourse')->name('my.course');
-
+    Route::get('/course/view/{course_id}','CourseView')->name('course.view');
 });
 
 
@@ -144,12 +144,12 @@ Route::controller(SettingController::class)->group(function(){
 
 
 
-// Admin All Order Route 
+// Admin All Order Route
 Route::controller(OrderController::class)->group(function(){
-    Route::get('/admin/pending/order','AdminPendingOrder')->name('admin.pending.order'); 
-    Route::get('/admin/order/details/{id}','AdminOrderDetails')->name('admin.order.details'); 
-    Route::get('/pending-confirm/{id}','PendingToConfirm')->name('pending-confirm'); 
-    Route::get('/admin/confirm/order','AdminConfirmOrder')->name('admin.confirm.order'); 
+    Route::get('/admin/pending/order','AdminPendingOrder')->name('admin.pending.order');
+    Route::get('/admin/order/details/{id}','AdminOrderDetails')->name('admin.order.details');
+    Route::get('/pending-confirm/{id}','PendingToConfirm')->name('pending-confirm');
+    Route::get('/admin/confirm/order','AdminConfirmOrder')->name('admin.confirm.order');
 
 
 
@@ -216,8 +216,8 @@ Route::controller(OrderController::class)->group(function(){
     Route::get('/instructor/all/order','InstructorAllOrder')->name('instructor.all.order');
     Route::get('/instructor/order/details/{payment_id}','InstructorOrderDetails')->name('instructor.order.details');
     Route::get('/instructor/order/invoice/{payment_id}','InstructorOrderInvoice')->name('instructor.order.invoice');
-        
-        
+
+
 });//
 
 
@@ -269,4 +269,4 @@ Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 Route::get('/checkout',[CartController::class,'CheckoutCreate'])->name('checkout');
 Route::post('/payment',[CartController::class,'Payment'])->name('payment');
 
-///// End Route Accessable for All 
+///// End Route Accessable for All
