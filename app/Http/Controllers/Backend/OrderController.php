@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -18,6 +17,8 @@ use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
 use App\Models\Payment;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class OrderController extends Controller
 {
@@ -63,7 +64,42 @@ class OrderController extends Controller
 
 
 
+    public function InstructorAllOrder(){
+        $id = Auth::user()->id;
 
+        $latestOrderItem = Order::where('instructor_id',$id)->select('payment_id',\DB::row('MAX(id) as max_id'))->groupBy('payment_id');
+
+        $orderItem = Order::joinsub($latestOrderItem,'latest_order',function($join){
+            $join->on('orders.id','=','latest_order.max_id');
+        })->orderBy('latest_order.max_id','DESC')->get();
+
+        return view('instructor.orders.all_orders',compact('orderItem'));
+    }// End Method 
+
+
+    public function InstructorOrderDetails($payment_id){
+
+        $payment = Payment::where('id',$payment_id)->first();
+        $orderItem = Order::where('payment_id',$payment_id)->orderBy('id','DESC')->get();
+
+        return view('instructor.orders.instructor_order_details',compact('payment','orderItem'));
+
+    }// End Method
+
+
+
+    public function InstructorOrderInvoice($payment_id){
+
+        $payment = Payment::where('id',$payment_id)->first();
+        $orderItem = Order::where('payment_id',$payment_id)->orderBy('id','DESC')->get();
+
+        $pdf = Pdf::loadview('instructor.orders.order_pdf',compact('payment','orderItem'))->setPaper('a4')->setOption([
+            'tempDir' => public_path(),
+            'chroot' =>public_path(),
+        ]);
+        return $pdf->download('invoice.pdf');
+
+    }// End Method
 
 
 } 

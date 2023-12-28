@@ -204,16 +204,17 @@ Route::controller(CourseController::class)->group(function(){
 });
 
 
+//order routes
+Route::controller(OrderController::class)->group(function(){
+    Route::get('/instructor/all/order','InstructorAllOrder')->name('instructor.all.order');
+    Route::get('/instructor/order/details/{payment_id}','InstructorOrderDetails')->name('instructor.order.details');
+    Route::get('/instructor/order/invoice/{payment_id}','InstructorOrderInvoice')->name('instructor.order.invoice');
+        
+        
+});//
 
 
-
-
-
-});// End Instructor Group Middleware
-
-
-
-
+});//End instructor Group Middleware
 
 
 ////// Route Accesable for all
