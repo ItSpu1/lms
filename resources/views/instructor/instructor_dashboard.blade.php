@@ -77,6 +77,10 @@
 	<script src="{{ asset('backend/assets/plugins/chartjs/js/chart.js') }}"></script>
 	<script src="{{ asset('backend/assets/js/index.js') }}"></script>
 	<!--app JS-->
+    <script>
+		new PerfectScrollbar('.chat-list');
+		new PerfectScrollbar('.chat-content');
+	</script>
 	<script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
 	<script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>

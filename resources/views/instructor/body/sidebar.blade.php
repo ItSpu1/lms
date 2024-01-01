@@ -51,11 +51,23 @@
 					<ul>
 						<li> <a href="{{ route('instructor.all.order')}}"><i class='bx bx-radio-circle'></i>All Orders</a>
 						</li>
-						
+
 
 					</ul>
 				</li>
+                <li>
+					<a class="has-arrow" href="javascript:;">
+						<div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+						</div>
+						<div class="menu-title">All Question</div>
+					</a>
+					<ul>
+						<li> <a href="{{ route('instructor.all.question')}}"><i class='bx bx-radio-circle'></i>All Question</a>
+						</li>
 
+
+					</ul>
+				</li>
 
 				</li>
 
@@ -90,7 +102,7 @@
 				</li>
 @else
 
-@endif 
+@endif
 
 				<li>
 					<a href="https://themeforest.net/user/codervent" target="_blank">
