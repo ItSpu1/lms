@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Coupon;
+use App\Models\Question;
 use Illuminate\Support\Facades\Session;
 use App\Models\Payment;
 use App\Models\Order;
@@ -119,7 +120,8 @@ class OrderController extends Controller
         $id=Auth::user()->id;
         $course =Order::Where('course_id',$course_id)->where('user_id',$id)->first();
         $section=CourseSection::where('course_id',$course_id)->orderBy('id','asc')->get();
-        return view('frontend.mycourse.course_view',compact('course','section'));
-    }// End Method
+        $allquestion=Question::latest()->get();
+        return view('frontend.mycourse.course_view',compact('course','section','allquestion'));
+    }// End Methodiew
 
 }

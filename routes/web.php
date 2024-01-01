@@ -13,7 +13,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\Backend\OrderController;
-
+use App\Http\Controllers\Backend\QuestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +55,13 @@ Route::controller(OrderController::class)->group(function(){
     Route::get('/course/view/{course_id}','CourseView')->name('course.view');
 });
 
+
+
+//User Question All Route  by enas
+Route::controller(QuestionController::class)->group(function(){
+    Route::post('/user/question','UserQuestion')->name('user.question');
+
+});
 
 });//end auth middleware
 
@@ -220,7 +227,12 @@ Route::controller(OrderController::class)->group(function(){
 
 
 });//
+Route::controller(QuestionController::class)->group(function(){
+    Route::get('/instructor/all/question','InstructorAllQuestion')->name('instructor.all.question');
+    Route::get('/question/details/{id}','QuestionDetails')->name('question.details');
+    Route::post('/instructor/reply','InstructorReply')->name('instructor.reply');
 
+});//
 
 });//End instructor Group Middleware
 
