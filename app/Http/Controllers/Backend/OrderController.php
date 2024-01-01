@@ -10,7 +10,7 @@ use App\Models\Course_goal;
 use App\Models\CourseSection;
 use App\Models\CourseLecture;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Coupon;
@@ -27,7 +27,7 @@ class OrderController extends Controller
         $payment = Payment::where('status','pending')->orderBy('id','DESC')->get();
         return view('admin.backend.orders.pending_orders',compact('payment'));
 
-    } // End Method 
+    } // End Method
 
 
     public function AdminOrderDetails($payment_id){
@@ -60,7 +60,7 @@ class OrderController extends Controller
         $payment = Payment::where('status','confirm')->orderBy('id','DESC')->get();
         return view('admin.backend.orders.confirm_orders',compact('payment'));
 
-    } // End Method 
+    } // End Method
 
 
 
@@ -74,7 +74,7 @@ class OrderController extends Controller
         })->orderBy('latest_order.max_id','DESC')->get();
 
         return view('instructor.orders.all_orders',compact('orderItem'));
-    }// End Method 
+    }// End Method
 
 
     public function InstructorOrderDetails($payment_id){
@@ -102,4 +102,24 @@ class OrderController extends Controller
     }// End Method
 
 
-} 
+    public function MyCourse(){
+
+        $id = Auth::user()->id;
+
+        $latestOrders = Order::where('user_id',$id)->select('course_id', \DB::raw('MAX(id) as max_id'))->groupBy('course_id');
+
+        $mycourse = Order::joinSub($latestOrders, 'latest_order', function($join) {
+            $join->on('orders.id', '=', 'latest_order.max_id');
+        })->orderBy('latest_order.max_id','DESC')->get();
+
+        return view('frontend.mycourse.my_all_course',compact('mycourse'));
+
+    }// End Method
+    public function CourseView($course_id){
+        $id=Auth::user()->id;
+        $course =Order::Where('course_id',$course_id)->where('user_id',$id)->first();
+        $section=CourseSection::where('course_id',$course_id)->orderBy('id','asc')->get();
+        return view('frontend.mycourse.course_view',compact('course','section'));
+    }// End Method
+
+}
