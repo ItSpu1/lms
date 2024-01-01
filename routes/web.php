@@ -71,6 +71,7 @@ Route::get('/admin/change/password',[AdminController::class,'AdminChangePassword
 Route::post('/admin/password/update',[AdminController::class,'AdminPasswordUpdate'])->name('admin.password.update');
 
 
+
 //category group controller added bu eenas
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/all/category','AllCategory')->name('all.category');
