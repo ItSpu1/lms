@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 @include('frontend.mycourse.body.header')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><!--library for show image whn you upload it -->
 <body>
@@ -946,4 +944,3 @@ END COURSE-DASHBOARD
 @include('frontend.mycourse.body.footer')
 </body>
 </html>
->>>>>>> a9b5413781c16b6fd6e06d0d2aedab0163006a49
