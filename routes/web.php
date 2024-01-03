@@ -14,6 +14,10 @@ use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\backend\SettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\QuestionController;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Backend\ReportController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +36,8 @@ use App\Http\Controllers\Backend\QuestionController;
 Route::get('/',[UserController::class,'Index'])->name('index');
 
 Route::get('/dashboard', function () {
-    return view('frontend.dashboard.index');})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('frontend.dashboard.index');})->middleware(['auth','roles:user', 'verified'])->name('dashboard');
+    
 
 Route::middleware('auth')->group(function () {
 Route::get('/user/profile',[UserController::class,'UserProfile'])->name('user.profile');
@@ -69,7 +74,7 @@ require __DIR__.'/auth.php';
 
 //Admin Group Middleware
 
-Route::middleware(['auth','role:admin'])->group(function(){
+Route::middleware(['auth','roles:admin'])->group(function(){
 Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.dashboard');
 Route::get('/admin/logout',[AdminController::class,'AdminLogout'])->name('admin.logout');
 Route::get('/admin/profile',[AdminController::class,'AdminProfile'])->name('admin.profile');
@@ -163,6 +168,20 @@ Route::controller(OrderController::class)->group(function(){
 
 });
 
+// Admin Report All Route
+Route::controller(ReportController::class)->group(function(){
+    Route::get('/report/view','ReportView')->name('report.view');
+    Route::post('/search/by','SearchByDate')->name('search.by.date');
+    Route::post('/search/by/month','SearchByMonth')->name('search.by.month');
+    Route::post('/search/by/yaer','SearchByYear')->name('search.by.year');
+
+   
+
+
+
+
+});
+
 
 
 
@@ -172,7 +191,7 @@ Route::controller(OrderController::class)->group(function(){
 }); // End Admin Group Middleware
 
 
-Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login');
+Route::get('/admin/login',[AdminController::class,'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
 //owies
 Route::get('/become/instructor',[AdminController::class,'BecomeInstructor'])->name('become.instructor');
@@ -181,7 +200,7 @@ Route::post('/instructor/register',[AdminController::class,'InstructorRegister']
 
 
 //Instructor Group Middleware
-Route::middleware(['auth','role:instructor'])->group(function(){
+Route::middleware(['auth','roles:instructor'])->group(function(){
 Route::get('/instructor/dashboard',[InstructorController::class,'InstructorDashboard'])->name('instructor.dashboard');
 Route::get('/instructor/logout',[InstructorController::class,'InstructorLogout'])->name('instructor.logout');
 Route::get('/instructor/profile',[InstructorController::class,'InstructorProfile'])->name('instructor.profile');
@@ -238,7 +257,7 @@ Route::controller(QuestionController::class)->group(function(){
 
 
 ////// Route Accesable for all
-Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login');
+Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login')->middleware(RedirectIfAuthenticated::class);;
 
 ////// Route Accesable for all section 16 added by Enas
 Route::get('/course/details/{id}/{slug}',[IndexController::class,'CourseDetails']);

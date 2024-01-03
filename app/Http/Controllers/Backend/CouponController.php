@@ -38,7 +38,7 @@ class CouponController extends Controller
 
         $notification = array(
             'message'=>'Coupon Insterted Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->route('admin.all.coupon')->with($notification);
 
@@ -64,7 +64,7 @@ class CouponController extends Controller
 
         $notification = array(
             'message'=>'Coupon Updated Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->route('admin.all.coupon')->with($notification);
 
@@ -77,7 +77,7 @@ class CouponController extends Controller
 
         $notification = array(
             'message'=>'Coupon Delete Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
 

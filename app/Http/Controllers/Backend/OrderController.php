@@ -47,7 +47,7 @@ class OrderController extends Controller
 
         $notification = array(
             'message'=>'Order Confirm Successfully',
-            'alert-Type'=>'success'
+            'alert-type'=>'success'
         );
         return redirect()->route('admin.confirm.order')->with($notification);
 

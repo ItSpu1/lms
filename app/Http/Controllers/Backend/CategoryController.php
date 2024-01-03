@@ -30,7 +30,7 @@ class CategoryController extends Controller
         ]);
         $notification = array(
             'message'=>'Category Insterted Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->route('all.category')->with($notification);
     }//end method
@@ -52,7 +52,7 @@ class CategoryController extends Controller
             ]);
             $notification = array(
                 'message'=>'Category updated with Image  Successfully',
-                'alert-Type'=>'Success'
+                'alert-type'=>'success'
             );
             return redirect()->route('all.category')->with($notification);
         }
@@ -64,7 +64,7 @@ class CategoryController extends Controller
             ]);
             $notification = array(
                 'message'=>'Category updated without Image  Successfully',
-                'alert-Type'=>'Success'
+                'alert-type'=>'success'
             );
 
             return redirect()->route('all.category')->with($notification);
@@ -77,7 +77,7 @@ class CategoryController extends Controller
         Category ::find($id)->delete();
         $notification = array(
             'message'=>'Category Deleted Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
 
         return redirect()->back()->with($notification);
@@ -106,7 +106,7 @@ class CategoryController extends Controller
     ]);
     $notification = array(
         'message'=>'SubCategory Insterted Successfully',
-        'alert-Type'=>'Success'
+        'alert-type'=>'success'
     );
     return redirect()->route('all.subcategory')->with($notification);
 }//end method
@@ -126,7 +126,7 @@ class CategoryController extends Controller
             ]);
             $notification = array(
                 'message'=>'SubCategory updated with Image  Successfully',
-                'alert-Type'=>'Success'
+                'alert-type'=>'success'
             );
             return redirect()->route('all.subcategory')->with($notification);
 
@@ -138,7 +138,7 @@ class CategoryController extends Controller
         SubCategory ::find($id)->delete();
         $notification = array(
             'message'=>'SubCategory Deleted Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
 
         return redirect()->back()->with($notification);
