@@ -92,7 +92,7 @@ class CourseController extends Controller
 
             $notification = array(
                 'message'=>'Course Insterted Successfully',
-                'alert-Type'=>'Success'
+                'alert-type'=>'success'
             );
             return redirect()->route('all.course')->with($notification);
 
@@ -272,7 +272,7 @@ public function AddCourseLecture($id){
 
         $notification = array(
             'message'=>'Course Section Add Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
 
@@ -309,7 +309,7 @@ public function AddCourseLecture($id){
 
         $notification = array(
             'message'=>'Course lecture Updated Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
 
@@ -321,7 +321,7 @@ public function AddCourseLecture($id){
         CourseLecture::find($id)->delete();
         $notification = array(
             'message'=>'Course lecture Delete Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
 
@@ -335,7 +335,7 @@ $section->delete();
 
         $notification = array(
             'message'=>'Course Section Delete Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
 

@@ -18,7 +18,12 @@ class InstructorController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/instructor/login');
+        $notification = array(
+            'message'=>'Logout Successfully',
+            'alert-type'=>'success'
+        );
+
+        return redirect('/instructor/login')->with($notification);
 
     }//end methods
 
@@ -49,7 +54,7 @@ class InstructorController extends Controller
             $data->save();
             $notification = array(
                 'message'=>'Instructor Profile Updated Successfully',
-                'alert-Type'=>'success'
+                'alert-type'=>'success'
             );
 
             return redirect()->back()->with($notification);
@@ -71,7 +76,7 @@ class InstructorController extends Controller
     if(!Hash::check($request->old_password, auth::user()->password)){
         $notification = array(
             'message'=>'Old Password Does not Match!',
-            'alert-Type'=>'error'
+            'alert-type'=>'error'
         );
         return redirect()->back()->with($notification);
     }
@@ -82,7 +87,7 @@ class InstructorController extends Controller
     ]);
     $notification = array(
         'message'=>'Password Change Successfully!',
-        'alert-Type'=>'success'
+        'alert-type'=>'success'
     );
     return redirect()->back()->with($notification);
 

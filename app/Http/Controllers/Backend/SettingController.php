@@ -28,7 +28,7 @@ class SettingController extends Controller
         ]);
         $notification = array(
             'message'=>'Smtp Setting Updated Successfully',
-            'alert-Type'=>'Success'
+            'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
     }

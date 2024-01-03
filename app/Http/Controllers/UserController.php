@@ -35,7 +35,7 @@ public function UserProfileStore(Request $request){
         $data->save();
         $notification = array(
             'message'=>'user Profile Updated Successfully',
-            'alert-Type'=>'success'
+            'alert-type'=>'success'
         );
 
         return redirect()->back()->with($notification);
@@ -49,7 +49,12 @@ public function UserLogout(Request $request)
 
     $request->session()->regenerateToken();
 
-    return redirect('/login');
+    $notification = array(
+        'message' => 'Logout Successfully',
+        'alert-type' => 'success'
+    );
+
+    return redirect('/login')->with($notification);
 }
 public function UserChangePassword(){
     $id =Auth::user()->id;
@@ -66,7 +71,7 @@ public function UserPasswordUpdate(Request $request){
 if(!Hash::check($request->old_password, auth::user()->password)){
     $notification = array(
         'message'=>'Old Password Does not Match!',
-        'alert-Type'=>'error'
+        'alert-type'=>'error'
     );
     return redirect()->back()->with($notification);
 }
@@ -77,7 +82,7 @@ User::whereId(auth::user()->id)->update([
 ]);
 $notification = array(
     'message'=>'Password Change Successfully!',
-    'alert-Type'=>'success'
+    'alert-type'=>'success'
 );
 return redirect()->back()->with($notification);
 

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Course;
+use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
@@ -25,11 +25,23 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/admin/login');
+        $notification = array(
+            'message'=>'Logout Successfully',
+            'alert-type'=>'success'
+        );
+
+        return redirect('/admin/login')->with($notification);
     }// End Method
+
+
+
     public function AdminLogin(){
         return view('admin.admin_login');
+        
+        
     }// End Method
+
+    
     public function AdminProfile(){
         $id =Auth::user()->id;
         $profileData= User::find($id);
@@ -53,7 +65,7 @@ class AdminController extends Controller
             $data->save();
             $notification = array(
                 'message'=>'Admin Profile Updated Successfully',
-                'alert-Type'=>'success'
+                'alert-type'=>'success'
             );
 
             return redirect()->back()->with($notification);
@@ -73,7 +85,7 @@ class AdminController extends Controller
     if(!Hash::check($request->old_password, auth::user()->password)){
         $notification = array(
             'message'=>'Old Password Does not Match!',
-            'alert-Type'=>'error'
+            'alert-type'=>'error'
         );
         return redirect()->back()->with($notification);
     }
@@ -84,7 +96,7 @@ class AdminController extends Controller
     ]);
     $notification = array(
         'message'=>'Password Change Successfully!',
-        'alert-Type'=>'success'
+        'alert-type'=>'success'
     );
     return redirect()->back()->with($notification);
 
@@ -120,7 +132,7 @@ class AdminController extends Controller
         ]);
         $notification = array(
             'message'=>'Instructor Register Successfully!',
-            'alert-Type'=>'success'
+            'alert-type'=>'success'
         );
         return redirect()->route('instructor.login')->with($notification);
 

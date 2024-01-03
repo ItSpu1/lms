@@ -24,7 +24,7 @@ class QuestionController extends Controller
         ]);
         $notification = array(
             'message'=>'Message Sent Successfully',
-            'alert-Type'=>'success'
+            'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
 
@@ -57,7 +57,7 @@ class QuestionController extends Controller
             ]);
             $notification = array(
                 'message'=>'Message Sent Successfully',
-                'alert-Type'=>'success'
+                'alert-type'=>'success'
             );
             return redirect()->route('instructor.all.question')->with($notification);
 
