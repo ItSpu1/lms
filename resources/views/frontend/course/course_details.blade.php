@@ -90,7 +90,7 @@
                 <div class="bread-btn-box pt-3">
                     <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2">
                         <i class="la la-heart-o mr-1"></i>
-                        <span class="swapping-btn" data-text-swap="Wishlisted" data-text-original="Wishlist">Wishlist</span>
+                        <span class="swapping-btn" data-text-swap="Wishlisted" data-text-original="Wishlist" id="{{$course->id}}" onclick="addToWishList(this.id)">Wishlist</span>
                     </button>
                     <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2" data-toggle="modal" data-target="#shareModal">
                         <i class="la la-share mr-1"></i>Share

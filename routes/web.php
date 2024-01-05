@@ -177,16 +177,15 @@ Route::controller(ReportController::class)->group(function(){
     Route::post('/search/by/month','SearchByMonth')->name('search.by.month');
     Route::post('/search/by/yaer','SearchByYear')->name('search.by.year');
 
-   
-
-
-
-
 });
 
-
-
-
+//Admin Review All Route
+Route::controller(ReviewController::class)->group(function(){
+    Route::get('/admin/pending/review','AdminPendingReview')->name('admin.pending.review');
+    Route::post('/update/review/stauts','UpdateReviewStatus')->name('update.review.stauts');
+    Route::get('/admin/active/review','AdminActiveReview')->name('admin.active.review');
+   
+});
 
 
 
@@ -267,6 +266,16 @@ Route::controller(CouponController::class)->group(function(){
 });
 ////owies instructor coupon all route
 
+
+//Instructor Review All Route
+Route::controller(ReviewController::class)->group(function(){
+    Route::get('/instructor/all/review','InstructorAllReview')->name('instructor.all.review');
+   
+});
+
+
+
+
 });//End instructor Group Middleware
 
 
@@ -315,7 +324,9 @@ Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 
 //Checkout Page Route
 Route::get('/checkout',[CartController::class,'CheckoutCreate'])->name('checkout');
+
 Route::post('/payment',[CartController::class,'Payment'])->name('payment');
+Route::post('/stripe_order',[CartController::class,'StripeOrder'])->name('stripe_order');
 
 
 
