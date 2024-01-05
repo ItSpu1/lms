@@ -16,6 +16,9 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReviewController;
+
+
 
 
 /*
@@ -133,7 +136,7 @@ Route::controller(AdminController::class)->group(function(){
 
 
 
-////owies admin coupon section 26
+////owies admin coupon all route
 Route::controller(CouponController::class)->group(function(){
     Route::get('/admin/all/coupon','AdminAllCoupon')->name('admin.all.coupon');
     Route::get('/admin/add/coupon','AdminAddCoupon')->name('admin.add.coupon');
@@ -143,8 +146,7 @@ Route::controller(CouponController::class)->group(function(){
     Route::get('/admin/delete/coupon/{id}','AdminDeleteCoupon')->name('admin.delete.coupon');
 
 });
-////owies section 26
-
+////owies admin coupon all route
 
 
 
@@ -251,7 +253,19 @@ Route::controller(QuestionController::class)->group(function(){
     Route::get('/question/details/{id}','QuestionDetails')->name('question.details');
     Route::post('/instructor/reply','InstructorReply')->name('instructor.reply');
 
-});//
+});
+
+////owies instructor coupon all route
+Route::controller(CouponController::class)->group(function(){
+    Route::get('/instructor/all/coupon','InstructorAllCoupon')->name('instructor.all.coupon');
+    Route::get('/instructor/add/coupon','InstructorAddCoupon')->name('instructor.add.coupon');
+    Route::post('/instructor/store/coupon','InstructorStoreCoupon')->name('instructor.store.coupon');
+    Route::get('/instructor/edit/coupon/{id}','InstructorEditCoupon')->name('instructor.edit.coupon');
+    Route::post('/instructor/update/coupon','InstructorUpdateCoupon')->name('instructor.update.coupon');
+    Route::get('/instructor/delete/coupon/{id}','InstructorDeleteCoupon')->name('instructor.delete.coupon');
+    
+});
+////owies instructor coupon all route
 
 });//End instructor Group Middleware
 
@@ -294,11 +308,19 @@ Route::controller(CartController::class)->group(function(){
 
 //Coupon Route
 Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+Route::post('/inscoupon-apply', [CartController::class, 'InsCouponApply']);
+
 Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 
 //Checkout Page Route
 Route::get('/checkout',[CartController::class,'CheckoutCreate'])->name('checkout');
 Route::post('/payment',[CartController::class,'Payment'])->name('payment');
+
+
+
+
+Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
+
 
 ///// End Route Accessable for All

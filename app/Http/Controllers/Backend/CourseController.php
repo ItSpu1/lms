@@ -4,15 +4,15 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Course;
 use App\Models\Course_goals;
-use App\Models\CourseLecture;
 use App\Models\CourseSection;
+use App\Models\CourseLecture;
 use Intervention\Image\Facades\Image;
-use App\Models\Category;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class CourseController extends Controller

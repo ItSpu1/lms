@@ -391,54 +391,63 @@
                            <button type="button" class="btn theme-btn theme-btn-transparent">Load more reviews</button>
                        </div>
                    </div><!-- end course-overview-card -->
-                   <div class="course-overview-card pt-4">
-                       <h3 class="fs-24 font-weight-semi-bold pb-4">Add a Review</h3>
-                       <div class="leave-rating-wrap pb-4">
-                           <div class="leave-rating leave--rating">
-                               <input type="radio" name='rate' id="star5"/>
-                               <label for="star5"></label>
-                               <input type="radio" name='rate' id="star4"/>
-                               <label for="star4"></label>
-                               <input type="radio" name='rate' id="star3"/>
-                               <label for="star3"></label>
-                               <input type="radio" name='rate' id="star2"/>
-                               <label for="star2"></label>
-                               <input type="radio" name='rate' id="star1"/>
-                               <label for="star1"></label>
-                           </div><!-- end leave-rating -->
-                       </div>
-                       <form method="post" class="row">
-                           <div class="input-box col-lg-6">
-                               <label class="label-text">Name</label>
-                               <div class="form-group">
-                                   <input class="form-control form--control" type="text" name="name" placeholder="Your Name">
-                                   <span class="la la-user input-icon"></span>
-                               </div>
-                           </div><!-- end input-box -->
-                           <div class="input-box col-lg-6">
-                               <label class="label-text">Email</label>
-                               <div class="form-group">
-                                   <input class="form-control form--control" type="email" name="email" placeholder="Email Address">
-                                   <span class="la la-envelope input-icon"></span>
-                               </div>
-                           </div><!-- end input-box -->
-                           <div class="input-box col-lg-12">
-                               <label class="label-text">Message</label>
-                               <div class="form-group">
-                                   <textarea class="form-control form--control pl-3" name="message" placeholder="Write Message" rows="5"></textarea>
-                               </div>
-                           </div><!-- end input-box -->
-                           <div class="btn-box col-lg-12">
-                               <div class="custom-control custom-checkbox mb-3 fs-15">
-                                   <input type="checkbox" class="custom-control-input" id="saveCheckbox" required>
-                                   <label class="custom-control-label custom--control-label" for="saveCheckbox">
-                                       Save my name, and email in this browser for the next time I comment.
-                                   </label>
-                               </div><!-- end custom-control -->
-                               <button class="btn theme-btn" type="submit">Submit Review</button>
-                           </div><!-- end btn-box -->
-                       </form>
-                   </div><!-- end course-overview-card -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   @guest
+ <p><b>For Add Course Review. You need to login first <a href="{{ route('login') }}"> Login Here</a></b></p>
+                   @else
+
+
+                <div class="course-overview-card pt-4">
+                    <h3 class="fs-24 font-weight-semi-bold pb-4">Add a Review</h3>
+        <form method="post" action="{{ route('store.review') }}" class="row">
+            @csrf
+        <div class="leave-rating-wrap pb-4">
+                <div class="leave-rating leave--rating">
+                    <input type="radio" name='rate' id="star5" value="5" />
+                    <label for="star5"></label>
+                    <input type="radio" name='rate' id="star4" value="4" />
+                    <label for="star4"></label>
+                    <input type="radio" name='rate' id="star3" value="3" />
+                    <label for="star3"></label>
+                    <input type="radio" name='rate' id="star2" value="2" />
+                    <label for="star2"></label>
+                    <input type="radio" name='rate' id="star1" value="1" />
+                    <label for="star1"></label>
+                </div><!-- end leave-rating -->
+            </div>
+
+                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
+
+                <div class="input-box col-lg-12">
+                    <label class="label-text">Message</label>
+                    <div class="form-group">
+                        <textarea class="form-control form--control pl-3" name="comment" placeholder="Write Message" rows="5"></textarea>
+                    </div>
+                </div><!-- end input-box -->
+                <div class="btn-box col-lg-12">
+                    
+                    <button class="btn theme-btn" type="submit">Submit Review</button>
+                </div><!-- end btn-box -->
+            </form>
+                    </div><!-- end course-overview-card -->
+                    
+                    @endguest
+                    
+                    
+
                </div><!-- end course-details-content-wrap -->
            </div><!-- end col-lg-8 -->
             <div class="col-lg-4">
@@ -487,6 +496,21 @@
     <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart({{ $course->id }},'{{ $course->course_name }}' ,'{{ $course->instructor_id }}' ,'{{ $course->course_name_slug }}')"><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
 
     <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"  onclick="buyCourse({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+
+    <div class="input-group mb-2" id="couponField">
+        <input class="form-control form--control pl-3" type="text"  id="coupon_name" placeholder="Coupon code">
+        <div class="input-group-append">
+            <input type="hidden" id="course_id" name="course_id" value="{{ $course->id }}">
+            <input type="hidden" id="instructor_id" name="instructor_id" value="{{ $course->instructor_id}}">
+      <a type="submit" onclick="applyInsCoupon()" class="btn theme-btn">Apply Code</a>
+        </div>
+    </div>
+
+
+
+
+
+
 </div>
                                 <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                                 <div class="preview-course-incentives">
