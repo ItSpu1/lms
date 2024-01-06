@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\Backend\ActiveUserController;
 
 
 
@@ -187,6 +188,12 @@ Route::controller(ReviewController::class)->group(function(){
    
 });
 
+//Admin All User and Instructor All Route
+Route::controller(ActiveUserController::class)->group(function(){
+    Route::get('/all/user','AllUser')->name('all.user');
+    Route::get('/all/instructor','AllInstructor')->name('all.instructor');
+  
+});
 
 
 }); // End Admin Group Middleware
@@ -270,7 +277,7 @@ Route::controller(CouponController::class)->group(function(){
 //Instructor Review All Route
 Route::controller(ReviewController::class)->group(function(){
     Route::get('/instructor/all/review','InstructorAllReview')->name('instructor.all.review');
-   
+    
 });
 
 
