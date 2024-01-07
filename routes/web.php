@@ -18,6 +18,8 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ActiveUserController;
+use App\Http\Controllers\Backend\BlogController;
+
 
 
 
@@ -196,6 +198,33 @@ Route::controller(ActiveUserController::class)->group(function(){
 });
 
 
+// Blog Category All Route 
+Route::controller(BlogController::class)->group(function(){
+    Route::get('/blog/category','AllBlogCategory')->name('blog.category');  
+    Route::post('/blog/category/store','StoreBlogCategory')->name('blog.category.store');  
+    Route::get('/edit/blog/category/{id}','EditBlogCategory');  
+    Route::post('/blog/category/update','UpdateBlogCategory')->name('blog.category.update'); 
+    Route::get('/delete/blog/category/{id}','DeleteBlogCategory')->name('delete.blog.category'); 
+
+});
+
+
+// Blog Post All Route 
+Route::controller(BlogController::class)->group(function(){
+    Route::get('/blog/post','BlogPost')->name('blog.post');  
+    Route::get('/add/blog/post','AddBlogPost')->name('add.blog.post');  
+    Route::post('/store/blog/post','StoreBlogPost')->name('store.blog.post');  
+    Route::get('/edit/post/{id}','EditBlogPost')->name('edit.post');  
+    Route::post('/update/blog/post','UpdateBlogPost')->name('update.blog.post');
+    Route::get('/delete/post/{id}','DeleteBlogPost')->name('delete.post');  
+
+
+
+
+});
+
+
+
 }); // End Admin Group Middleware
 
 
@@ -335,10 +364,10 @@ Route::get('/checkout',[CartController::class,'CheckoutCreate'])->name('checkout
 Route::post('/payment',[CartController::class,'Payment'])->name('payment');
 Route::post('/stripe_order',[CartController::class,'StripeOrder'])->name('stripe_order');
 
-
-
-
 Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
+Route::get('/blog/details/{slug}', [BlogController::class, 'BlogDetails']);
+Route::get('/blog/cat/list/{id}', [BlogController::class, 'BlogCatList']);
+Route::get('/blog', [BlogController::class, 'BlogList'])->name('blog');
 
 Route::post('/mark-notification-as-read/{notification}', [CartController::class, 'MarkAsRead']);
 

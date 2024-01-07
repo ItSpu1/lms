@@ -25,14 +25,15 @@ class RedirectIfAuthenticated
                 if (Auth::check() && Auth::user()->role == 'user') {
                     return redirect('/dashboard');
                 }
-                
+
                 if (Auth::check() && Auth::user()->role == 'instructor') {
                     return redirect('/instructor/dashboard');
                 }
-                
+
                 if (Auth::check() && Auth::user()->role == 'admin') {
                     return redirect('/admin/dashboard');
                 }
+
 
 
             }
