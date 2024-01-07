@@ -20,8 +20,12 @@ use App\Models\Payment;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Orderconfirm;
+use App\Models\User;
 use App\Models\Wishlist;
+use App\Notifications\OrderComplete;
 use Stripe;
+use Illuminate\Support\Facades\Notification;
+
 class CartController extends Controller
 {
     public function AddToCart(Request $request, $id){
@@ -267,6 +271,9 @@ class CartController extends Controller
 
 
     public function Payment(Request $request){
+
+        $user = User::where('role','instructor')->get();
+        
         if (Session::has('coupon')) {
             $total_amount = Session::get('coupon')['total_amount'];
         }else {
@@ -333,9 +340,10 @@ class CartController extends Controller
                 'email' => $sendmail->email,
             ];
             Mail::to($request->email)->send(new Orderconfirm($data));
-
-
            /// End Send email to student /// 
+
+            ///Send Notification 
+            Notification::send($user, new OrderComplete($request->name));
 
             $notification = array(
             'message' => 'Cash Payment Submit Successfully',
@@ -461,6 +469,14 @@ public function BuyToCart(Request $request, $id){
 }// End Method 
 //end buy this course "owies"
 
+    public function MarkAsRead(Request $request, $notificationId){
 
+        $user = Auth::user();
+        $notification = $user->notifications()->where('id',$notificationId)->first();
+        if ($notification) {
+            $notification->MarkAsRead();
+        }
+        return response()->json(['count' => $user->unreadNotifications()->count()]);
+    }
 
-}
+}//End Method

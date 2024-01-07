@@ -191,7 +191,7 @@ Route::controller(ReviewController::class)->group(function(){
 //Admin All User and Instructor All Route
 Route::controller(ActiveUserController::class)->group(function(){
     Route::get('/all/user','AllUser')->name('all.user');
-    Route::get('/all/instructor','AllInstructor')->name('all.instructor');
+    Route::get('/all/active/instructor','AllActiveInstructor')->name('all.active.instructor');
   
 });
 
@@ -339,6 +339,8 @@ Route::post('/stripe_order',[CartController::class,'StripeOrder'])->name('stripe
 
 
 Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
+
+Route::post('/mark-notification-as-read/{notification}', [CartController::class, 'MarkAsRead']);
 
 
 ///// End Route Accessable for All

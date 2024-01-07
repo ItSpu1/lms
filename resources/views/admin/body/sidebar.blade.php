@@ -150,7 +150,7 @@
 					</a>
 					<ul>
 						<li> <a href="{{ route('all.user') }}"><i class='bx bx-radio-circle'></i>All User </a>
-						<li> <a href="{{ route('all.instructor') }}"><i class='bx bx-radio-circle'></i>All Instructor </a>
+						<li> <a href="{{ route('all.active.instructor') }}"><i class='bx bx-radio-circle'></i>All Instructor </a>
 						</li>
 					</ul>
 				</li>
