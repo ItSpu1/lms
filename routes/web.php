@@ -153,11 +153,18 @@ Route::controller(CouponController::class)->group(function(){
 
 
 
-///enas section 31
+///enas section 31 
 Route::controller(SettingController::class)->group(function(){
     Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
     Route::post('/update/smtp','SmtpSetting')->name('update.smtp');
 
+});
+
+/// Site Setting All Route
+Route::controller(SettingController::class)->group(function(){
+    Route::get('/smsitetp/setting','SiteSetting')->name('site.setting');
+    Route::post('/update/site','UpdateSite')->name('update.site');
+    
 });
 
 

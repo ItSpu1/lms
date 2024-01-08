@@ -8,7 +8,7 @@
 				</div>
 				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i>
 				</div>
-			    </div>
+			</div>
 			<!--navigation-->
 			<ul class="metismenu" id="menu">
 			<li>
@@ -94,6 +94,8 @@
 					<ul>
 						<li> <a href="{{ route('smtp.setting') }}"><i class='bx bx-radio-circle'></i>Smtp Setting</a>
 						</li>
+						<li> <a href="{{ route('site.setting') }}"><i class='bx bx-radio-circle'></i>Site Setting</a>
+						</li>
 
 					</ul>
 				</li>
@@ -173,6 +175,7 @@
 					</ul>
 				</li>
 
+				
 				</li>
 
 				<li class="menu-label">Charts & Maps</li>

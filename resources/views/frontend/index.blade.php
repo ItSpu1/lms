@@ -1,5 +1,10 @@
 @extends('frontend.master')
 @section('home')
+
+@section('title')
+Easy Learning
+@endsection
+
 <!--================================
          START HERO AREA
 =================================-->
