@@ -10,8 +10,7 @@ use App\Models\Course;
 use App\Models\Course_goals;
 use App\Models\CourseSection;
 use App\Models\CourseLecture;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -43,12 +42,8 @@ class CourseController extends Controller
         ]);
 
         $image=$request->file('course_image');
-       
-        $manager = new ImageManager(new Driver());
-        $name_gen=hexdec(uniqid()).'.'.$request->file('course_image')->getClientOriginalExtension();
-        $image = $manager->read($request->file('course_image'));
-        $image = $image->resize(370,246);
-        $image->toJpeg(80)->save(base_path('public/upload/course/thumbnail/'.$name_gen));
+        $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(370,246)->save('upload/course/thumbnail/'.$name_gen);
         $save_url ='upload/course/thumbnail/'.$name_gen;
 
         $video=$request->file('video');
@@ -349,7 +344,7 @@ $section->delete();
 
 
 
-              // owies video 78
+             
 
 
 
