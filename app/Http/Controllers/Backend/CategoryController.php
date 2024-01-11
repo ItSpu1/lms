@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 class CategoryController extends Controller
 {
 // added by enas
@@ -19,15 +20,20 @@ class CategoryController extends Controller
 
            }
     public function StoreCategory(Request $request){
-        $image=$request->file('image');
-        $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(370,246)->save('upload/category/'.$name_gen);
-        $save_url ='upload/category/'.$name_gen;
-        Category::insert([
-            'category_name'=>$request->category_name,
-            'category_slug'=>strtolower(str_replace('','-',$request->category_name)),// Web Development =>web-development
-                'image'=>$save_url,
-        ]);
+        if ($request->file('image')) {
+            
+            $manager = new ImageManager(new Driver());
+            $name_gen=hexdec(uniqid()).'.'.$request->file('image')->getClientOriginalExtension();
+            $img = $manager->read($request->file('image'));
+            $img = $img->resize(370,246);
+            $img->toJpeg(80)->save(base_path('public/upload/category/'.$name_gen));
+            $save_url ='upload/category/'.$name_gen;
+            Category::insert([
+                'category_name'=>$request->category_name,
+                'category_slug'=>strtolower(str_replace('','-',$request->category_name)),// Web Development =>web-development
+                    'image'=>$save_url,
+            ]);
+        }//End If
         $notification = array(
             'message'=>'Category Insterted Successfully',
             'alert-type'=>'success'
@@ -40,16 +46,19 @@ class CategoryController extends Controller
     }
     public function UpdateCategory(Request $request){
         $cat_id=$request->id;
+
         if($request->file('image')){
             $image=$request->file('image');
             $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             Image::make($image)->resize(370,246)->save('upload/category/'.$name_gen);
             $save_url ='upload/category/'.$name_gen;
+            
             Category::find($cat_id)->update([
                 'category_name'=>$request->category_name,
                 'category_slug'=>strtolower(str_replace('','-',$request->category_name)),// Web Development =>web-development
                     'image'=>$save_url,
             ]);
+
             $notification = array(
                 'message'=>'Category updated with Image  Successfully',
                 'alert-type'=>'success'

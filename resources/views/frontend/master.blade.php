@@ -1,3 +1,7 @@
+@php
+    $setting = App\Models\SiteSetting::find(1);
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Favicon --> 
-    <link rel="icon" sizes="16x16" href="{{ asset('frontend/images/favicon.png') }}">
+    <link rel="icon" sizes="16x16" href="{{ asset($setting->logo) }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

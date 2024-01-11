@@ -94,6 +94,7 @@ Route::post('/admin/password/update',[AdminController::class,'AdminPasswordUpdat
 //category group controller added bu eenas
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/all/category','AllCategory')->name('all.category');
+    // ->middleware('permission::category.all');;
     Route::get('/add/category','AddCategory')->name('add.category');
     Route::post('/store/category','StoreCategory')->name('store.category');
     Route::get('/edit/category/{id}','EditCategory')->name('edit.category');
@@ -107,6 +108,7 @@ Route::controller(CategoryController::class)->group(function(){
 //SubCategory Added By enas section 8
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/all/subcategory','AllSubCategory')->name('all.subcategory');
+    // ->middleware('permission::subcategory.all');
     Route::get('/add/subcategory','AddSubCategory')->name('add.subcategory');
     Route::post('/store/subcategory','StoreSubCategory')->name('store.subcategory');
     Route::get('/edit/subcategory/{id}','EditSubCategory')->name('edit.subcategory');
@@ -264,7 +266,16 @@ Route::controller(RoleController::class)->group(function(){
 
 });
 
+// Admin User All Route 
+Route::controller(AdminController::class)->group(function(){
+    Route::get('/all/admin','AllAdmin')->name('all.admin');  
+    Route::get('/add/admin','AddAdmin')->name('add.admin');  
+    Route::post('/store/admin','StoreAdmin')->name('store.admin');  
+    Route::get('/edit/admin/{id}','EditAdmin')->name('edit.admin');  
+    Route::post('/update/admin/{id}','UpdateAdmin')->name('update.admin');  
+    Route::get('/delete/admin/{id}','DeleteAdmin')->name('delete.admin');  
 
+});
 
 }); // End Admin Group Middleware
 

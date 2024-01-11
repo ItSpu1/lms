@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SmtpSetting;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\SiteSetting;
 
 
@@ -49,11 +50,16 @@ class SettingController extends Controller
 
         if ($request->file('logo')) {
 
-            $image = $request->file('logo');  
-            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(140,41)->save('upload/logo/'.$name_gen);
-            $save_url = 'upload/logo/'.$name_gen;
     
+            $manager = new ImageManager(new Driver());
+            $name_gen=hexdec(uniqid()).'.'.$request->file('logo')->getClientOriginalExtension();
+            $image = $manager->read($request->file('logo'));
+            $image->resize(160, 60);  
+            $image->save(base_path('public/upload/logo/'.$name_gen));
+            $save_url ='upload/logo/'.$name_gen;
+
+
+
             SiteSetting::find($site_id)->update([
                 'phone' => $request->phone, 
                 'email' => $request->email, 
