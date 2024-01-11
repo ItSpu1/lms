@@ -82,12 +82,12 @@
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-12">
                                                     <div class="d-grid">
                                                         <button type="submit" class="btn btn-primary">Sign in</button>
                                                     </div>
-                                                </div>
+                                                {{-- </div>
                                                 <div class="col-12">
                                                     <div class="text-center ">
                                                         <p class="mb-0">Don't have an account yet? <a href="{{route('become.instructor') }}">Sign up here</a>

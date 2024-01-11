@@ -1,7 +1,7 @@
 @extends('frontend.master')
 @section('home')
 @section('title')
-Register Page | Easy Learning
+Register Page | Knowledge Hub
 @endsection
 <!-- ================================
     START BREADCRUMB AREA

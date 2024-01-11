@@ -714,17 +714,51 @@
                         <p class="card-text"><a href="teacher-detail.html">{{$inscourse['user']['name']}}</a></p>
                         <div class="rating-wrap d-flex align-items-center py-2">
                             <div class="review-stars">
-                                <span class="rating-number">4.4</span>
+
+                                @if ($inscourse->rating == Null)
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                @elseif ($inscourse->rating == 1)
+                                <span class="la la-star"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                @elseif ($inscourse->rating == 2)
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                @elseif ($inscourse->rating == 3)
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                @elseif ($inscourse->rating == 4)
                                 <span class="la la-star"></span>
                                 <span class="la la-star"></span>
                                 <span class="la la-star"></span>
                                 <span class="la la-star"></span>
                                 <span class="la la-star-o"></span>
+                                @elseif ($inscourse->rating == 5)
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                @endif
+                                    
+                                
+                                
                             </div>
-                            <span class="rating-total pl-1">(20,230)</span>
+                            {{-- <span class="rating-total pl-1">(20,230)</span> --}}
                         </div><!-- end rating-wrap -->
                         <div class="d-flex justify-content-between align-items-center">
-                            <p class="card-price text-black font-weight-bold">12.99 <span class="before-price font-weight-medium">129.99</span></p>
 
                     @if ($inscourse->discount_price == NULL)
                     <p class="card-price text-black font-weight-bold">${{ $inscourse->selling_price }}  </p>

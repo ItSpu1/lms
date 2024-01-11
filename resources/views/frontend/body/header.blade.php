@@ -4,6 +4,7 @@
 
 <header class="header-menu-area bg-white">
     <div class="header-top pr-150px pl-150px border-bottom border-bottom-gray py-1">
+      
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -40,16 +41,15 @@
     @auth
  <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('dashboard') }}">Dashboard</a></li>
     <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('user.logout') }}"> Logout</a></li>
-    @else
-     <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a></li>
-    <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('register') }}"> Register</a></li>
-    @endauth
+   @endauth
 
                         </ul>
                     </div><!-- end header-widget -->
                 </div><!-- end col-lg-6 -->
             </div><!-- end row -->
         </div><!-- end container-fluid -->
+
+
     </div><!-- end header-top -->
     <div class="header-menu-content pr-150px pl-150px bg-white">
         <div class="container-fluid">
@@ -156,9 +156,15 @@
                 </li>
             </ul>
         </div><!-- end shop-cart -->
+        @auth
+        <div class="nav-right-button">
+            <a href="{{ route('dashboard') }}" class="btn theme-btn d-none d-lg-inline-block"> Dashboard</a>
+        </div><!-- end nav-right-button -->
+        @else
                             <div class="nav-right-button">
-                                <a href="admission.html" class="btn theme-btn d-none d-lg-inline-block"><i class="la la-user-plus mr-1"></i> Admission</a>
+                                <a href="{{ route('login') }}" class="btn theme-btn d-none d-lg-inline-block"><i class="la la-user-plus mr-1"></i> Login</a>
                             </div><!-- end nav-right-button -->
+                            @endauth
                         </div><!-- end menu-wrapper -->
 </div><!-- end col-lg-10 -->
                 </div><!-- end row -->

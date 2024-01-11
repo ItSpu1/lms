@@ -54,7 +54,7 @@ class SettingController extends Controller
             $manager = new ImageManager(new Driver());
             $name_gen=hexdec(uniqid()).'.'.$request->file('logo')->getClientOriginalExtension();
             $image = $manager->read($request->file('logo'));
-            $image->resize(160, 60);  
+            $image->resize(160, 70);  
             $image->save(base_path('public/upload/logo/'.$name_gen));
             $save_url ='upload/logo/'.$name_gen;
 

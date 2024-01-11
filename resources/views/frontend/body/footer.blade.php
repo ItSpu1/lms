@@ -1,5 +1,6 @@
-
 @php
+    $courses = App\Models\Course::where('status',1)->orderBy('id','ASC')->limit(6)->get();
+    $categories = App\Models\Category::orderBy('category_name','ASC')->get();
     $setting = App\Models\SiteSetting::find(1);
 @endphp
 
@@ -44,12 +45,9 @@
                     <h3 class="fs-20 font-weight-semi-bold">Courses</h3>
                     <span class="section-divider section--divider"></span>
                     <ul class="generic-list-item">
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">Hacking</a></li>
-                        <li><a href="#">PHP Learning</a></li>
-                        <li><a href="#">Spoken English</a></li>
-                        <li><a href="#">Self-Driving Car</a></li>
-                        <li><a href="#">Garbage Collectors</a></li>
+                        @foreach ($courses as $course)
+                        <li><a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{$course->course_name}} </a></li>
+                        @endforeach
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
@@ -71,7 +69,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <p class="copy-desc">{{$setting->copyright}}</p>
+                    <p class="copy-desc">&copy;{{$setting->copyright}}</p>
                 </div><!-- end col-lg-6 -->
                 <div class="col-lg-6">
                     <div class="d-flex flex-wrap align-items-center justify-content-end">

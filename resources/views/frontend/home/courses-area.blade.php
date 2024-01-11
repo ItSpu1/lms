@@ -1,6 +1,7 @@
 @php
     $courses = App\Models\Course::where('status',1)->orderBy('id','ASC')->limit(6)->get();
     $categories = App\Models\Category::orderBy('category_name','ASC')->get();
+    
 @endphp
 
 
@@ -17,10 +18,10 @@
                 <a class="nav-link  " id="business-tab" data-toggle="tab" href="#business" role="tab" aria-controls="business" aria-selected="true">All</a>
             </li>
 
-
-            @foreach ($categories as $category)
+            @foreach ($categories as $category) 
+           
             <li class="nav-item">
-                <a class="nav-link" id="business-tab" data-toggle="tab" href="#business{{$category}}" role="tab" aria-controls="business" aria-selected="false">{{$category->category_name}}</a>
+                <a class="nav-link" id="business-tab" data-toggle="tab" href="#business{{ $category->id }}" role="tab" aria-controls="business" aria-selected="false">{{ $category->category_name }}</a>
             </li>
             @endforeach
 
