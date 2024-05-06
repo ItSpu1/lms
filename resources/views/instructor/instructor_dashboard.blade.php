@@ -7,6 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
 	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png"/>
+
+	@vite(['resources/js/app.js'])
+	
 	<meta name="csrf-token" content="{{ csrf_token() }}">
     <!--plugins-->
 	<link href="{{ asset('backend//plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet"/>

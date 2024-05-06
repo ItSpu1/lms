@@ -86,5 +86,11 @@ $notification = array(
 );
 return redirect()->back()->with($notification);
 
+}//End Method
+
+public function LiveChat(){
+    return view('frontend.dashboard.live_chat');
+
 }
+
 }

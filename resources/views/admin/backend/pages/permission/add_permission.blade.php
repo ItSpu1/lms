@@ -37,6 +37,7 @@
 
                <option value="Category">Category</option>
                <option value="Instructor">Instructor </option>
+               <option value="Course">Course </option>
                <option value="Coupon">Coupon</option>
                <option value="Setting">Setting</option>
                <option value="Orders">Orders</option>
@@ -45,6 +46,7 @@
                <option value="All User">All User </option>
                <option value="Blog">Blog</option>
                <option value="Role and Permission">Role and Permission</option> 
+               <option value="Admin">Admin</option> 
 
 
                     </select>

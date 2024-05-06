@@ -1,5 +1,8 @@
 @extends('frontend.master')
 @section('home')
+@section('title')
+{{ $instructor->name }} | Knowledge Hub
+@endsection
 
 <!-- ================================
     START BREADCRUMB AREA
@@ -17,6 +20,9 @@
                     <p class="lh-18">{{ $instructor->email }}</p>
                 </div>
             </div><!-- end media -->
+
+           
+
             <ul class="social-icons social-icons-styled social--icons-styled">
                 <li><a href="#"><i class="la la-facebook"></i></a></li>
                 <li><a href="#"><i class="la la-twitter"></i></a></li>
@@ -199,6 +205,20 @@
     <div class="bg-gray py-5">
         <div class="container">
             <ul class="nav nav-tabs generic-tab justify-content-center" id="myTab" role="tablist">
+                
+                @auth
+                    
+                <li class="nav-item">
+        <div id="app">
+            <send-message :receiverid="{{ $instructor->id }}" receivername="{{ $instructor->name }}"></send-message>
+        </div>
+                </li>
+                @else
+                <button class="btn theme-btn d-none d-lg-inline-block">Login First                    
+                </button>
+                @endauth
+
+
                 <li class="nav-item">
                     <a class="nav-link active" id="about-me-tab" data-toggle="tab" href="#about-me" role="tab" aria-controls="about-me" aria-selected="false">
                         About Me

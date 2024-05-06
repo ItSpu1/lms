@@ -16,13 +16,13 @@
         <div class="ms-auto">
             <div class="btn-group">
            <a href="{{ route('add.admin') }}" class="btn btn-primary  ">Add Admin </a>  
-
-
+  
+             
             </div>
         </div>
     </div>
     <!--end breadcrumb-->
-
+  
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -39,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                       
                         @foreach ($alladmin as $key=> $item) 
                         <tr>
                             <td>{{ $key+1 }}</td>
@@ -48,29 +48,30 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>
-                                @foreach ($item->roles as $role)
-                                    <span class="badge badge-pill bg-danger">{{$role->name}}</span>
-                                @endforeach
+                         @foreach ($item->roles as $role)
+                           <span class="badge badge-pill bg-danger">{{ $role->name }}</span>  
+                         @endforeach       
+
                             </td>
                             <td>
-        <a href="{{ route('edit.admin',$item->id) }}" class="btn btn-info px-5">Edit </a>   
-        <a href="{{ route('delete.admin',$item->id) }}" class="btn btn-danger px-5" id="delete">Delete </a>                    
+       <a href="{{ route('edit.admin',$item->id) }}" class="btn btn-info px-5">Edit </a>   
+       <a href="{{ route('delete.admin',$item->id) }}" class="btn btn-danger px-5" id="delete">Delete </a>                    
                             </td>
                         </tr>
                         @endforeach
-
+                         
                     </tbody>
-
+                     
                 </table>
             </div>
         </div>
     </div>
 
 
-
-
+   
+   
 </div>
-
+ 
 
 
 

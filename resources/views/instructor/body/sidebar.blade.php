@@ -102,6 +102,22 @@
 
 
 
+				<li>
+					<a class="has-arrow" href="javascript:;">
+						<div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+						</div>
+						<div class="menu-title">Live Chat</div>
+					</a>
+					<ul>
+						<li> <a href="{{ route('instructor.live.chat')}}"><i class='bx bx-radio-circle'></i>Live Chat</a>
+						</li>
+
+
+					</ul>
+				</li>
+
+
+
 
 				</li>
 

@@ -2,7 +2,7 @@
 @section('home')
 
 @section('title')
-{{ $course->course_name }} | Easy Learning
+{{ $course->course_name }} | Knowledge Hub
 @endsection
 <!-- ================================
     START BREADCRUMB AREA

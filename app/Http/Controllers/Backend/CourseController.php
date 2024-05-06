@@ -261,6 +261,8 @@ public function AddCourseLecture($id){
 
 }// End Method
 
+
+
     public function AddCourseSection(Request $request){
 
         $cid = $request->id;

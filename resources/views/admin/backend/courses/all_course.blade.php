@@ -57,6 +57,7 @@
 
 
 
+										@if (Auth::user()->can('active.course.menu')) 
 
 										<td>
                                           <div class="form-check-danger form-check form-switch">
@@ -64,6 +65,7 @@
         <label class="form-check-label" for="flexSwitchCheckCheckedDanger"> </label>
     </div>
                                         </td>
+										@endif
 									</tr>
                                 @endforeach
 								</tfoot>

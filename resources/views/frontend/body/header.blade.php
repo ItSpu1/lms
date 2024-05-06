@@ -102,11 +102,13 @@
                                     </li>
                                 </ul>
                             </div><!-- end menu-category -->
-                            <form method="post">
+                            <form method="get">
                                 <div class="form-group mb-0">
-                                    <input class="form-control form--control pl-3" type="text" name="search" placeholder="Search for anything">
+                                    <input class="form-control form--control pl-3" type="text" id="searchInput" placeholder="Search for courses"> 
                                     <span class="la la-search search-icon"></span>
                                 </div>
+                                <div id="searchResults" class="text-dark"></div>
+
                             </form>
                             <nav class="main-menu">
                                 <ul>
@@ -388,4 +390,54 @@
         </div>
     </div><!-- end mobile-search-form -->
     <div class="body-overlay"></div>
+
+
+
+
+<!--search -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Function to clear search results
+        function clearSearchResults() {
+            $('#searchResults').empty();
+        }
+    
+        // Search input keyup event handler
+        $('#searchInput').on('keyup', function() {
+            var searchTerm = $(this).val();
+    
+            $.ajax({
+                url: '{{ route("search") }}',
+                type: 'GET',
+                data: {
+                    term: searchTerm
+                },
+                success: function(response) {
+                    clearSearchResults(); // Clear search results before appending new ones
+                    $.each(response, function(index, product) {
+                        var productId = product.id;
+                        var productSlug = product.course_name_slug;
+                        var productUrl = '/course/details/' + productId + '/' + productSlug;
+                        $('#searchResults').append('<a href="' + productUrl + '">' + product.course_name + '</a><br>');
+                    });
+                }
+            });
+        });
+    
+        // Click event handler for body to clear search results
+        $('body').on('click', function(event) {
+            if (!$(event.target).closest('#searchInput').length) { // Check if clicked outside search input
+                clearSearchResults(); // Clear search results
+            }
+        });
+    });
+    </script>
+
+
+    
+
+
 </header><!-- end header-menu-area -->
+

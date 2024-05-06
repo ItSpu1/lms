@@ -14,10 +14,10 @@
                 </ol>
             </nav>
         </div>
-
+         
     </div>
     <!--end breadcrumb-->
-
+ 
     <div class="card">
         <div class="card-body p-4">
             <h5 class="mb-4">Add Admin</h5>
@@ -58,16 +58,16 @@
               <option selected="" disabled>Open this select menu</option>
                 @foreach ($roles as $role)
                <option value="{{ $role->id }}"> {{ $role->name }}</option>  
-
+                    
                 @endforeach        
                     </select>
                 </div>
 
-
+ 
                 <div class="col-md-12">
                     <div class="d-md-flex d-grid align-items-center gap-3">
           <button type="submit" class="btn btn-primary px-4">Save Changes</button>
-
+                      
                     </div>
                 </div>
             </form>
@@ -75,9 +75,9 @@
     </div>
 
 
-
-
+   
+   
 </div>
-
+ 
 
 @endsection

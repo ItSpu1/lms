@@ -20,6 +20,8 @@ use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\ChatController;
+use App\Http\Controllers\SearchController;
 
 
 
@@ -52,6 +54,8 @@ Route::post('/user/profile/store',[UserController::class,'UserProfileStore'])->n
 Route::get('/user/logout',[UserController::class,'UserLogout'])->name('user.logout');
 Route::get('/user/change/password',[UserController::class,'UserChangePassword'])->name('user.change.password');
 Route::post('/user/password/update',[UserController::class,'UserPasswordUpdate'])->name('user.password.update');
+Route::get('/live/chat',[UserController::class,'LiveChat'])->name('live.chat');
+
 
 //user WishList all route added by agha
 Route::controller(WishListController::class)->group(function(){
@@ -91,7 +95,7 @@ Route::post('/admin/password/update',[AdminController::class,'AdminPasswordUpdat
 
 
 
-//category group controller added bu eenas
+//category group controller added by enas
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/all/category','AllCategory')->name('all.category');
     // ->middleware('permission::category.all');;
@@ -423,5 +427,12 @@ Route::get('/blog', [BlogController::class, 'BlogList'])->name('blog');
 
 Route::post('/mark-notification-as-read/{notification}', [CartController::class, 'MarkAsRead']);
 
+// Chat Post Request Route
+Route::post('/send-message', [ChatController::class, 'SendMessage']);
+Route::get('/user-all', [ChatController::class, 'GetAllUsers']);
+Route::get('/user-message/{id}', [ChatController::class, 'UserMsgById']);
+Route::get('/instructor/live/chat', [ChatController::class, 'LiveChat'])->name('instructor.live.chat');
 
+// Search Route
+Route::get('/search', [SearchController::class, 'CourseSearch'])->name('search');
 ///// End Route Accessable for All
