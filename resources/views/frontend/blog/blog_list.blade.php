@@ -37,7 +37,7 @@
     <div class="col-lg-6">
         <div class="card card-item">
             <div class="card-image">
-                <a href="blog-single.html" class="d-block">
+                <a href="{{ url('blog/details/'.$item->post_slug) }}" class="d-block">
                     <img class="card-img-top lazy" src="{{ asset($item->post_image) }}" data-src="images/img8.jpg" alt="Card image cap">
                 </a>
                 <div class="course-badge-labels">
@@ -52,7 +52,7 @@
                     <li class="d-flex align-items-center"><a href="#">130 Likes</a></li>
                 </ul>
                 <div class="d-flex justify-content-between align-items-center pt-3">
-                    <a href="blog-single.html" class="btn theme-btn theme-btn-sm theme-btn-white">Read More <i class="la la-arrow-right icon ml-1"></i></a>
+                    <a href="{{ url('blog/details/'.$item->post_slug) }}" class="btn theme-btn theme-btn-sm theme-btn-white">Read More <i class="la la-arrow-right icon ml-1"></i></a>
                     <div class="share-wrap">
                         <ul class="social-icons social-icons-styled">
                             <li class="mr-0"><a href="#" class="facebook-bg"><i class="la la-facebook"></i></a></li>

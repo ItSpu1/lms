@@ -56,7 +56,6 @@ Route::get('/user/change/password',[UserController::class,'UserChangePassword'])
 Route::post('/user/password/update',[UserController::class,'UserPasswordUpdate'])->name('user.password.update');
 Route::get('/live/chat',[UserController::class,'LiveChat'])->name('live.chat');
 
-
 //user WishList all route added by agha
 Route::controller(WishListController::class)->group(function(){
     Route::get('/user/wishlist','AllWishlist')->name('user.wishlist');
@@ -64,21 +63,16 @@ Route::controller(WishListController::class)->group(function(){
     Route::get('/wishlist-remove/{id}','RemoveWishlist');
 
 });
-
 //User My Course All Route  by enas
 Route::controller(OrderController::class)->group(function(){
     Route::get('/my/course','MyCourse')->name('my.course');
     Route::get('/course/view/{course_id}','CourseView')->name('course.view');
 });
-
-
-
 //User Question All Route  by enas
 Route::controller(QuestionController::class)->group(function(){
     Route::post('/user/question','UserQuestion')->name('user.question');
 
 });
-
 });//end auth middleware
 
 require __DIR__.'/auth.php';
@@ -109,7 +103,7 @@ Route::controller(CategoryController::class)->group(function(){
 
 
 
-//SubCategory Added By enas section 8
+//SubCategory Added By enas
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/all/subcategory','AllSubCategory')->name('all.subcategory');
     // ->middleware('permission::subcategory.all');
@@ -124,7 +118,7 @@ Route::controller(CategoryController::class)->group(function(){
 
 
 
-//Instructor all route Added By owies section 10
+//Instructor all route Added By owies
 Route::controller(AdminController::class)->group(function(){
     Route::get('/all/instructor','AllInstructor')->name('all.instructor');
     Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
@@ -134,15 +128,13 @@ Route::controller(AdminController::class)->group(function(){
 
 
 
-////owies admin courses section 25
+////owies admin courses
 Route::controller(AdminController::class)->group(function(){
     Route::get('/admin/all/course','AdminAllCourse')->name('admin.all.course');
     Route::post('/update/course/status','UpdateCourseStatus')->name('update.course.status');
     Route::get('/admin/course/details/{id}','AdminCourseDetails')->name('admin.course.details');
-
-
 });
-////owies admin courses section 25
+////owies admin courses 
 
 
 
@@ -160,7 +152,7 @@ Route::controller(CouponController::class)->group(function(){
 
 
 
-///enas section 31 
+///enas  
 Route::controller(SettingController::class)->group(function(){
     Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
     Route::post('/update/smtp','SmtpSetting')->name('update.smtp');
@@ -169,7 +161,7 @@ Route::controller(SettingController::class)->group(function(){
 
 /// Site Setting All Route
 Route::controller(SettingController::class)->group(function(){
-    Route::get('/smsitetp/setting','SiteSetting')->name('site.setting');
+    Route::get('/site/setting','SiteSetting')->name('site.setting');
     Route::post('/update/site','UpdateSite')->name('update.site');
     
 });
@@ -374,7 +366,7 @@ Route::controller(ReviewController::class)->group(function(){
 ////// Route Accesable for all
 Route::get('/instructor/login',[InstructorController::class,'InstructorLogin'])->name('instructor.login')->middleware(RedirectIfAuthenticated::class);;
 
-////// Route Accesable for all section 16 added by Enas
+////// Route Accesable for all added by Enas
 Route::get('/course/details/{id}/{slug}',[IndexController::class,'CourseDetails']);
 
 //owies
@@ -436,3 +428,6 @@ Route::get('/instructor/live/chat', [ChatController::class, 'LiveChat'])->name('
 // Search Route
 Route::get('/search', [SearchController::class, 'CourseSearch'])->name('search');
 ///// End Route Accessable for All
+
+//all categories route for all users
+Route::get('/all/categories',[CategoryController::class,'ViewAllCategories'])->name('all.categories');

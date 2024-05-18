@@ -22,7 +22,7 @@
         
       
         
-        <li class="menu-label">UI Elements</li>
+        <li class="menu-label">Admin Elements</li>
        
         @if (Auth::user()->can('category.menu')) 
         <li>
@@ -104,7 +104,7 @@
                 <div class="menu-title">Manage Setting</div>
             </a>
             <ul>
-                <li> <a href="{{ route('smtp.setting') }}"><i class='bx bx-radio-circle'></i>Manage SMPT</a>
+                <li> <a href="{{ route('smtp.setting') }}"><i class='bx bx-radio-circle'></i>Manage SMTP</a>
                 </li>
                 <li> <a href="{{ route('site.setting') }}"><i class='bx bx-radio-circle'></i>Site Setting </a>
                 </li>

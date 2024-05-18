@@ -36,7 +36,7 @@
                         <li><a href="{{route('become.instructor') }}">Become a Teacher</a></li>
                         <li><a href="#">Support</a></li>
                         <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="{{route('blog')}}">Blog</a></li>
                     </ul>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->

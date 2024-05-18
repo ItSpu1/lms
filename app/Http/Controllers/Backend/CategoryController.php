@@ -144,7 +144,21 @@ class CategoryController extends Controller
         return redirect()->back()->with($notification);
 
 
-    }
+    }//end method
+   
+    public function ViewAllCategories(){
+
+       $categories = Category::all();
+
+        return view('frontend.category.all_categories',['categories'=>$categories]);
+
+
+    }//end method
+
+
+
+
+   
 }
 
 

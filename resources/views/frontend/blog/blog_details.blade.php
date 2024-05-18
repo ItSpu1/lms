@@ -223,7 +223,7 @@
 
                    
                             <div class="view-all-course-btn-box">
-                                <a href="blog-no-sidebar.html" class="btn theme-btn w-100">View All Posts <i class="la la-arrow-right icon ml-1"></i></a>
+                                <a href="{{route('blog')}}" class="btn theme-btn w-100">View All Posts <i class="la la-arrow-right icon ml-1"></i></a>
                             </div>
                         </div>
                     </div><!-- end card -->
