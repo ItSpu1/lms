@@ -8,28 +8,27 @@
 </p>
 
 ## Project Commands
-
+# Install and configure the shopping cart package
 composer require anayarojo/shoppingcart
-
 php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
 
+# Publish Laravel pagination views
 php artisan vendor:publish --tag=laravel-pagination
 
+# Install and configure the spatie/laravel-permission package
 composer require spatie/laravel-permission
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 
-
+# Install and configure the maatwebsite/excel package
 composer require maatwebsite/excel
-
 php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
 
+# Create Export and Import classes for the Permission model
 php artisan make:export PermissionExport --model=Permission
-
 php artisan make:import PermissionImport --model=Permission
-php artisan optimize:clear
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-#
+# Clear and optimize the application cache
+php artisan optimize:clear
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 "# Younga" 
